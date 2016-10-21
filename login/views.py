@@ -20,7 +20,7 @@ def dologin(request):
         login(request, user)
         return HttpResponseRedirect(reverse('homepage:index',args = (request.POST["UserName"],)))
     else:
-        return render(request, 'login/index.html',{"Something_Wrong":True})
+        return HttpResponseRedirect(reverse('login:index'))
     
 
     

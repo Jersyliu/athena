@@ -12,12 +12,10 @@ def index(request, username):
     if request.user.is_authenticated:
         return render(request, 'homepage/index.html',{"UserName":request.user.username})
     else:
-        return HttpResponseRedirect(reverse('login:index',args = tuple()))
+        #return HttpResponseRedirect(reverse('login:index'))
+        return render(request, 'homepage/logout.html')
     
 
 def logoutuser(request):
-    #return render(request, 'login/index.html',{})
+    logout(request)
     return HttpResponseRedirect(reverse('login:index'))
-    #return HttpResponse("ahha")
-    #return HttpResponse("ahha")
-    #logout(request)
