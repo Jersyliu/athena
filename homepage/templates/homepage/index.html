@@ -1,3 +1,28 @@
-<h1>Welcome {{ UserName }}</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
 
-<button><a href="{% url 'homepage:logoutuser' %}">Logout</a></button>
+<div class="titleAthena">
+    <span float="left"><h1 class="titleText"> ATHENA </h1></span>
+    <p class="helloUser">Welcome, <a class="username" href="#">{{ UserName }}</a></p>
+</div>
+
+<div class="leftpane">
+    <div class="profilePic">
+        <img class="img-circle"src="/static/homepage/images/profilepic.png">
+        <p> -- {{ UserName }} -- </p>
+        <hr>
+    </div>
+    <div class="listoptions">
+        <ul>
+            <li><a href="#">Course in Progress</a></li>
+            <li><a href="{% url 'homepage:startanewcourse'%}">Start New Course</a></li>
+        </ul>
+    </div>
+<a class="abutton" href="{% url 'homepage:logoutuser' %}">Logout</a>
+</div>
+
+<div class="newsfeed">
+    <div class="newscontent">
+        <h1> What your class has been up to... </h1>
+    </div>
+</div>
