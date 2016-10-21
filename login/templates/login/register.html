@@ -1,0 +1,25 @@
+{% if Already_exist %}<p><strong>Please change a user name!</strong></p>{% endif %}
+{% if Password_Not_Match %}<p><strong>PassWord Not Match</strong></p>{% endif %}
+
+<form action="{% url 'login:doregister' %}" method="post">
+{% csrf_token %}
+<table align = "center">
+<tr>
+<td>User Name:</td><td><input type="text" name="UserName" value="User Name"></td>
+</tr>
+<tr>
+<td>Password:</td><td><input type="password" name="PassWord" value="Password"></td>
+</tr>
+<tr>
+<td>Confirm Password:</td><td><input type="password" name="ConPassWord" value="Password"></td>
+</tr>
+<tr>
+<td><input type="submit" value="Sign Up" /></td>
+</tr>
+</table>
+<!--
+User name: <input type="text" name="UserName" value="User Name"><br>
+PassWord: <input type="text" name="PassWord" value="Password"><br>
+<input type="submit" value="Login or SignUp" />
+-->
+</form>
