@@ -1,0 +1,56 @@
+
+.titleAthena{
+    background-color: darkorange;
+    height: 60px;
+    font-weight:normal;
+}
+.titleText{
+    color:white;
+    font-size:62px;
+}
+.logintable{
+    padding: 25px;
+}
+.loginimage{
+    text-align:center;
+    height:200px;
+    padding: 20px 50px;
+}
+.password, .username{
+    font-style: italic;
+    color: grey;
+    border-radius: 5px; 
+    padding: 10px 7px;
+    width: 317px;
+}
+.button{
+    width: 150px;            
+    background-color: darkorange; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: green; /* Green */           
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;            
+}
+
+.abutton{
+    text-decoration: none;
+    color: white;
+}
+td{
+    padding: 5px
+}

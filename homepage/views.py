@@ -16,7 +16,8 @@ def index(request, username):
     
 
 def logoutuser(request):
-    return HttpResponse("ahha")
-    logout(request)
-    #return HttpResponseRedirect(reverse('login:index'))
-    return HttpResponse("ahha")
+    #return render(request, 'login/index.html',{})
+    return HttpResponseRedirect(reverse('login:index'))
+    #return HttpResponse("ahha")
+    #return HttpResponse("ahha")
+    #logout(request)
