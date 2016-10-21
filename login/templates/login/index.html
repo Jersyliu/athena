@@ -48,39 +48,42 @@
     </script>
 </head>
 
-<form action="{% url 'login:dologin' %}" method="post">
-{% csrf_token %}
+
 
 <div class="titleAthena">
     <h1 class="titleText"> ATHENA </h1>
 </div>
-
-<div class="logintable">
-    <table align = "center">
-    <tr>
-    <td colspan="2"><img class="loginimage" src= "/static/login/images/welcome.png"></td>
-    </tr>
-    <tr>
-    <tr>
-    <td colspan="2">Please Login:</td>
-    </tr>
-    <tr>
-    <td colspan="2"><input class="username" id = "username" type="text" name="UserName" value="User Name" onfocus="enterField('username')" onblur="exitField(this)"></td>
-    </tr>
-    <tr>
-    <td colspan="2"><input class="password" type="text" name="PassWord" value="Password" onfocus="enterPassField(this)" onblur="exitPassField(this)"></td>
-    </tr>
-    <tr>
-    <td><input class="button" type="submit" value="Login" /></td>
-    <td><button class="button"><a class="abutton" href="{% url 'login:register' %}">Sign Up</a></button></td>
-    </tr>
-    </table>
-</div>    
+<body class="background">
+    <form action="{% url 'login:dologin' %}" method="post">
+    {% csrf_token %}
+        <div class="logintable">
+            <table align = "center">
+            <tr>
+            <td colspan="2"><img class="loginimage" src= "/static/login/images/welcome.png"></td>
+            </tr>
+            <tr>
+            <tr>
+            <td colspan="2"><p class="text-white">Please Login:</p></td>
+            </tr>
+            <tr>
+            <td colspan="2"><input class="username" id = "username" type="text" name="UserName" value="User Name" onfocus="enterField('username')" onblur="exitField(this)"></td>
+            </tr>
+            <tr>
+            <td colspan="2"><input class="password" type="text" name="PassWord" value="Password" onfocus="enterPassField(this)" onblur="exitPassField(this)"></td>
+            </tr>
+            <tr>
+            <td><input class="button" type="submit" value="Login" /></td>
+            <td><a class="abutton" href="{% url 'login:register' %}">Sign Up</a></td>
+            </tr>
+            </table>
+        </div>  
+    </form>
+</body>  
 <!--
 User name: <input type="text" name="UserName" value="User Name"><br>
 PassWord: <input type="text" name="PassWord" value="Password"><br>
 <input type="submit" value="Login or SignUp" />
 -->
-</form>
+
 
 

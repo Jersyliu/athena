@@ -8,6 +8,13 @@
     color:white;
     font-size:62px;
 }
+.background{
+  background: url(images/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .logintable{
     padding: 25px;
 }
@@ -22,6 +29,11 @@
     border-radius: 5px; 
     padding: 10px 7px;
     width: 317px;
+}
+.text-white{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
 }
 .button{
     width: 150px;            
@@ -47,9 +59,32 @@
     border-radius: 25px;            
 }
 
+.abutton:hover{
+    background-color: green; /* Green */           
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;            
+}
+
 .abutton{
     text-decoration: none;
     color: white;
+    font-family:sans-serif;  
+    width: 90px;            
+    background-color: darkorange; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
 }
 td{
     padding: 5px
