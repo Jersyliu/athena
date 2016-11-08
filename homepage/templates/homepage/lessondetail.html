@@ -1,0 +1,5 @@
+<h1> Welcome {{ User.username }}, this is the whole lesson list for {{CourseName}} </h1>
+
+{% for i in lessonDetail %}
+    <div><p>{{ i.lesson_name }}:{{ i.summary }} </p></div>
+{% endfor %}

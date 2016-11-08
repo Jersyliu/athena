@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
+
+<div class="titleAthena">
+    <span float="left"><h1 class="titleText"> ATHENA </h1></span>
+    <p class="helloUser">Welcome, <a class="username" href="{% url 'homepage:index' User.username %}">{{ User.username }}</a></p>
+</div>
+
+ <h1>Course List: </h1>
+
+{% for i in CourseClass %}
+    <div class = "course_block"> 
+        <a href="{% url 'homepage:lessondetail' i.course_name %}"class="course_link">
+        <!--<p class = "course_title"> {{ i.course_name}} </p> -->
+        <img class = "course_image" src= {{i.image}}>
+        <p class = "course_content">{{ i.num_of_lessons}} lessons </p>
+        </a>
+    </div>
+    <div class="spacing"></div>
+{% endfor %}

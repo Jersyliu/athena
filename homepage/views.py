@@ -19,3 +19,9 @@ def index(request, username):
 def logoutuser(request):
     logout(request)
     return HttpResponseRedirect(reverse('login:index'))
+
+def allcourseslist(request):
+    return render(request, 'homepage/startanewcourse.html', {"CourseClass":Course.objects.all(),"User":request.user})
+    
+def lessondetail(request, coursename):
+    return render(request, 'homepage/lessondetail.html', {"CourseName": coursename, "User":request.user, "lessonDetail":Lesson.objects.filter(course__course_name=coursename)})

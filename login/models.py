@@ -11,6 +11,7 @@ class NewUser(User):
 class Course(models.Model):
     course_name = models.CharField(max_length=200)
     num_of_lessons = models.IntegerField(default=0)
+    image= models.CharField(max_length=200, default=None)
     
     def __str__(self):
         return self.course_name+";"+str(self.num_of_lessons)
@@ -18,8 +19,9 @@ class Course(models.Model):
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson_name = models.CharField(max_length=200)
-    content = models.CharField(max_length=20000)
-
+    content = models.CharField(max_length=200)
+    summary = models.CharField(max_length=20000, default=None)
+    
     def __str__(self):
         return self.course.course_name+";"+self.lesson_name
 
