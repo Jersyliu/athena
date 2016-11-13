@@ -1,3 +1,4 @@
+
 .course_nav {
     float:left;
     width:150px;
@@ -40,4 +41,24 @@
     margin-top:-16px;
     margin-right:4px;
     cursor:pointer;
+}
+
+.lesson_list{
+    list-style-type:circle;
+    font-weight:bold;
+}
+
+.lesson_item{
+    padding-bottom:10px;
+    cursor:pointer;
+}
+
+.sidebar_btn{
+    width:49%;
+    padding: 10px;
+    border: none;
+    display: inline-block;
+}
+.sidebar_btn:focus{
+    outline: none;
 }

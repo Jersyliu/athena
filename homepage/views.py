@@ -23,5 +23,9 @@ def logoutuser(request):
 def courseList(request, username):
     return render(request, 'homepage/courselist.html', {"CourseClass":Course.objects.all(),"User":request.user})
     
-def course(request, username, coursename):
-    return render(request, 'homepage/course.html', {"CourseName": coursename, "User":request.user, "lessonDetail":Lesson.objects.filter(course__course_name=coursename)})
+def course(request, username, coursename, lessonname):
+    if coursename == lessonname:
+        lesson = Lesson.objects.filter(course__course_name=coursename)[0]
+    else:
+        lesson = Lesson.objects.get(lesson_name=lessonname)
+    return render(request, 'homepage/course.html', {"CourseName": coursename, "User":request.user, "lessonDetail":Lesson.objects.filter(course__course_name=coursename), "loadlesson":lesson})
