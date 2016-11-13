@@ -1,3 +1,13 @@
+html, body, {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: hidden;
+}
+
+
 
 .course_nav {
     float:left;
@@ -18,7 +28,8 @@
 }
 
 .main_lesson{
-    overflow:hidden
+    overflow:hidden;
+    height:100%;
 
 }
 
@@ -32,7 +43,7 @@
 .coding_practice{
     display:block;
     overflow: auto;
-    height:100%;
+    
 }
 
 .hide_lesson{
