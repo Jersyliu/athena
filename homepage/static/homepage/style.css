@@ -4,6 +4,7 @@ body {
 }
 
 .titleAthena{
+    margin:0px;
     background-color: darkorange;
     height: 60px;
     font-weight:normal;
@@ -11,7 +12,6 @@ body {
 .titleText{
     color:white;
     font-size:62px;
-    display: inline;
     padding-left: 10px;
     margin-top:-10px;
 }
