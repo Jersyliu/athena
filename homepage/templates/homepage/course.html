@@ -1,11 +1,11 @@
 
 {% load static %}
-
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage/course_style.css' %}" />
 <html>
 <head>
     <title>Athena</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'homepage/course_style.css' %}" />
+    <input type="hidden" id="expected_output" value="{{ loadlesson.expected_output }}"/>
     <script>
     isHidden = false;
     function showhidelesson(btn, el){
@@ -22,35 +22,69 @@
             document.getElementById("content_pane").style.visibility = "visible"
         }
     }
-    </script>
+    var expected_output = document.getElementById("expected_output").value;
+    function getoutput(){
+        output = document.getElementById("output").innerHTML;      
+        if (output.trim() == expected_output.trim())
+            document.getElementById("status").src = "/static/homepage/images/check.png";
+        else
+            document.getElementById("status").src = "/static/homepage/images/x.png";
+    }
+    
+    function toggleSidebar(el, other){
+        other.style.backgroundColor= "darkorange";
+        other.style.color = "white";
+        el.style.backgroundColor = "#e6e6ff";
+        el.style.color = "grey";
+        if (el.name == 'qrs'){
+            document.getElementById("who-pane").style.visibility = "hidden";
+            document.getElementById("qrs-pane").style.visibility = "visible";
+            document.getElementById("qrs-pane").style.height = "100%";
+            document.getElementById("who-pane").style.height = "0px";            
+        }
+        else{
+            document.getElementById("qrs-pane").style.visibility = "hidden";
+            document.getElementById("who-pane").style.visibility = "visible"; 
+            document.getElementById("who-pane").style.height = "100%";
+            document.getElementById("qrs-pane").style.height = "0px";                
+        }
+    }
+    </script>    
 </head>
 <body>
 <div class="titleAthena">
     <span><h1 class="titleText"> ATHENA </h1></span>
-    <p class="helloUser">Welcome, <a class="username" href="#">{{  User.username }}</a></p>
+    <p class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></p>
 </div>
 
     <div class="course_nav">
-    {% for i in lessonDetail %}
-        <li>{{ i.lesson_name }}:{{ i.summary }}</li>
-    {% endfor %}
+        <p> {{CourseName}}
+        <ul class="lesson_list">
+            {% for i in lessonDetail %}
+            <li class="lesson_item"><a href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a></li>  
+            {% endfor %}
+        </ul>
     </div>
 
     <div class="lesson_sidebar">
-        <button>Quick Reference</button>
-        <button>Who's Online</button>
-        <p>will be able to toggle between who's online and Quick reference sheet</p>
+        <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
+        <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
+        <p></p>
+        <div id="qrs-pane">Quick Reference Sheet</div>
+        <div id="who-pane">Who's online </div>
     </div>
-    
+    <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
     <div class="main_lesson">
         <div class= "lesson_content">
             <img id="showhidebtn" class="hide_lesson" src="/static/homepage/images/hide.png" onclick="showhidelesson(this, this.parentNode)">
-            <div id="content_pane">
-                <p>some lesson content</p>
+            <div id="content_pane">  
+                {% with template_name=loadlesson.content %}
+                    {% include template_name %}
+                {% endwith %}
             </div>
         </div>
         <div class= "coding_practice">
-            <p> this is where the code editor will be</p>
+            <p> Write your code here: </p>
             {% include './editor.html' %}
         </div>
     </div>    
