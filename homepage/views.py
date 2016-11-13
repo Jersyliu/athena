@@ -14,6 +14,9 @@ def profile(request, username):
     else:
         #return HttpResponseRedirect(reverse('login:index'))
         return render(request, 'homepage/logout.html')
+
+def otherprofile(request, username):
+    return render(request, 'homepage/otherprofile.html',{"UserName":username})
     
 
 def logoutuser(request):

@@ -73,7 +73,7 @@
         <div id="qrs-pane">Quick Reference Sheet</div>
         <div id="who-pane">
 	        {% for i in whosOnline %}
-	        <p>{{ User.isOnline }} {{ i.username }}</p>
+	        <li><a href="{% url 'homepage:otherprofile' i.username %}">{{ i.username }}</a></li> 
 	        {% endfor %}
 	    </div>
     </div>
