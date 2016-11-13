@@ -1,13 +1,14 @@
 {% if Already_exist %}<p><strong>Please change a user name!</strong></p>{% endif %}
 {% if Password_Not_Match %}<p><strong>PassWord Not Match</strong></p>{% endif %}
 {% load static %}
+<html>
 <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}" />
 <script type="text/javascript" src="{% static 'login/loginscripts.js' %}" ></script>
 
+<body class="background">
 <div class="titleAthena">
     <h1 class="titleText"> ATHENA </h1>
 </div>
-<body class="background">
     <form action="{% url 'login:doregister' %}" method="post">
     {% csrf_token %}
         <div class="logintable">
@@ -37,3 +38,4 @@ User name: <input type="text" name="UserName" value="User Name"><br>
 PassWord: <input type="text" name="PassWord" value="Password"><br>
 <input type="submit" value="Login or SignUp" />
 -->
+</html>

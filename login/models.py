@@ -24,6 +24,7 @@ class Lesson(models.Model):
     summary = models.CharField(max_length=20000, default=None)
     #expected_output
     #point_value
+    #video
     def __str__(self):
         return self.course.course_name+";"+self.lesson_name
 
