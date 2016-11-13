@@ -12,7 +12,8 @@ class Course(models.Model):
     course_name = models.CharField(max_length=200)
     num_of_lessons = models.IntegerField(default=0)
     image= models.CharField(max_length=200, default=None)
-    
+    #Quickreference sheet
+    #gif library
     def __str__(self):
         return self.course_name+";"+str(self.num_of_lessons)
 
@@ -21,7 +22,8 @@ class Lesson(models.Model):
     lesson_name = models.CharField(max_length=200)
     content = models.CharField(max_length=200)
     summary = models.CharField(max_length=20000, default=None)
-    
+    #expected_output
+    #point_value
     def __str__(self):
         return self.course.course_name+";"+self.lesson_name
 
