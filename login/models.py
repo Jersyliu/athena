@@ -22,7 +22,7 @@ class Lesson(models.Model):
     lesson_name = models.CharField(max_length=200)
     content = models.CharField(max_length=200)
     summary = models.CharField(max_length=20000, default=None)
-    #expected_output
+    expected_output = models.CharField(max_length=200, default=None)
     #point_value
     #video
     def __str__(self):
