@@ -10,14 +10,13 @@
     isHidden = false;
     function showhidelesson(btn, el){
         if (!isHidden){
-            el.style.height = "10px"
+            el.style.height = "10px";
             isHidden = true;
-            btn.src = "/static/homepage/images/unhide.png"
-            document.getElementById("content_pane").style.visibility = "hidden"
+            btn.src = "/static/homepage/images/unhide.png";
+            document.getElementById("content_pane").style.visibility = "hidden";
         }
         else{
             el.style.height = "40%";
-            document.getElementById("coding_practice").parentNode.style.height = "100%";
             isHidden = false;
             btn.src = "/static/homepage/images/hide.png"
             document.getElementById("content_pane").style.visibility = "visible"
