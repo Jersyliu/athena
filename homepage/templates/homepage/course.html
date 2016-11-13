@@ -23,8 +23,8 @@
         }
     }
     var expected_output = document.getElementById("expected_output").value;
-    function getoutput(){
-        output = document.getElementById("output").innerHTML;      
+    function getoutput(){   
+        output = document.getElementById("output").innerHTML;  
         if (output.trim() == expected_output.trim())
             document.getElementById("status").src = "/static/homepage/images/check.png";
         else
