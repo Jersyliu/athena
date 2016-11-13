@@ -1,0 +1,43 @@
+.course_nav {
+    float:left;
+    width:150px;
+    height:90%;
+    background-color: #e6e6ff;
+    border-right:solid;
+    border-width:1px;
+}
+
+.lesson_sidebar{
+    float:right;
+    width:250px;
+    height:90%;
+    background-color: #e6e6ff;
+    border-left:solid;
+    border-width:1px;    
+}
+
+.main_lesson{
+    overflow:hidden
+
+}
+
+.lesson_content{
+    height:40%;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+.coding_practice{
+    display:block;
+    overflow: auto;
+    height:100%;
+}
+
+.hide_lesson{
+    position:relative;
+    display: block;
+    float:right;
+    margin-top:-16px;
+    margin-right:4px;
+    cursor:pointer;
+}
