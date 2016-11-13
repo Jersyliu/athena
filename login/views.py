@@ -18,7 +18,7 @@ def dologin(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponseRedirect(reverse('homepage:index',args = (request.POST["UserName"],)))
+        return HttpResponseRedirect(reverse('homepage:courseList',args = (request.POST["UserName"],)))
     else:
         return HttpResponseRedirect(reverse('login:index'))
     
@@ -36,6 +36,6 @@ def doregister(request):
         if request.POST["PassWord"] == request.POST["ConPassWord"]:
             user = NewUser.objects.create_user(username = request.POST["UserName"], password = request.POST["PassWord"])
             login(request, user)
-            return HttpResponseRedirect(reverse('homepage:index',args = (request.POST["UserName"],)))
+            return HttpResponseRedirect(reverse('homepage:courseList',args = (request.POST["UserName"],)))
         else:
             return render(request, 'login/register.html',{"Already_exist":False,"Password_Not_Match":True})
