@@ -26,6 +26,7 @@
     height:40%;
     border-bottom: solid;
     border-width: 1px;
+    overflow: auto;
 }
 
 .coding_practice{
@@ -38,7 +39,7 @@
     position:relative;
     display: block;
     float:right;
-    margin-top:-16px;
+    margin-top:0px;
     margin-right:4px;
     cursor:pointer;
 }
