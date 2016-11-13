@@ -28,4 +28,11 @@ def course(request, username, coursename, lessonname):
         lesson = Lesson.objects.filter(course__course_name=coursename)[0]
     else:
         lesson = Lesson.objects.get(lesson_name=lessonname)
-    return render(request, 'homepage/course.html', {"CourseName": coursename, "User":request.user, "lessonDetail":Lesson.objects.filter(course__course_name=coursename), "loadlesson":lesson})
+    whosOnline = NewUser.objects.filter(isOnline = True)
+    context = {"CourseName": coursename,
+               "User":request.user,
+               "lessonDetail":Lesson.objects.filter(course__course_name=coursename),
+               "loadlesson":lesson,
+               "whosOnline":whosOnline
+               }
+    return render(request, 'homepage/course.html', context)
