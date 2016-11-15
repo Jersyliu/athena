@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 beautifulsoup4==4.5.1
 Django==1.10.2
 mysqlclient==1.3.9
@@ -7,3 +8,11 @@ gunicorn==19.6.0
 dj-database-url~=0.4.1
 psycopg2~=2.6.2
 whitenoise~=3.2.2
+=======
+Django (1.10.3)
+gunicorn (19.6.0)
+mysqlclient (1.3.9)
+pip (9.0.1)
+setuptools (28.8.0)
+wheel (0.30.0a0)
+>>>>>>> 1fff135ffd3b14580fa0d20101372a4ce943b6d4

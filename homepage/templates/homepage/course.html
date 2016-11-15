@@ -28,7 +28,7 @@
         if (output.trim() == expected_output.trim())
             document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
         else
-            document.getElementById("status").src = "/static/homepage/images/x.png";
+            document.getElementById("status").src = "{% static 'homepage/images/x.png' %}";
     }
     
     function toggleSidebar(el, other){
@@ -71,12 +71,16 @@
         <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
         <p></p>
         <div id="qrs-pane">Quick Reference Sheet</div>
-        <div id="who-pane">Who's online </div>
+        <div id="who-pane">
+	        {% for i in whosOnline %}
+	        <li><a href="{% url 'homepage:otherprofile' i.username %}">{{ i.username }}</a></li> 
+	        {% endfor %}
+	    </div>
     </div>
     <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
     <div class="main_lesson">
         <div class= "lesson_content">
-            <img id="showhidebtn" class="hide_lesson" src="/static/homepage/images/hide.png" onclick="showhidelesson(this, this.parentNode)">
+            <img id="showhidebtn" class="hide_lesson" src="{% static 'homepage/images/hide.png' %}" onclick="showhidelesson(this, this.parentNode)">
             <div id="content_pane">  
                 {% with template_name=loadlesson.content %}
                     {% include template_name %}
