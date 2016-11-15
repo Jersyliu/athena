@@ -1,1 +1,1 @@
-web: gunicorn squawker.wsgi --log-file -
+web: gunicorn RealProject2.wsgi --log-file -
