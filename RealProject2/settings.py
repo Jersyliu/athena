@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'RealProject2.wsgi.application'
 DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgres',
-		'NAME': 'athena_db2',
-		'USER': 'root',
-		'PASSWORD': 'crazyworld',
-		'HOST': '127.0.0.1',
-		'PORT': '3306',
+		'NAME': 'd7ru7rhctini5s',
+		'USER': 'javowsteoxoktp',
+		'PASSWORD': '77CPx9tFdsZWWItoLGeMaoQEfa',
+		'HOST': 'ec2-54-243-249-149.compute-1.amazonaws.com',
+		'PORT': '5432',
     }
 }
 
