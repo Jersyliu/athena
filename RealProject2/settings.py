@@ -142,7 +142,6 @@ STATIC_URL = '/login/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'login/static'),
     os.path.join(BASE_DIR, 'homepage/static'),
-    os.path.join(BASE_DIR, 'staticfiles'),
 )
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
