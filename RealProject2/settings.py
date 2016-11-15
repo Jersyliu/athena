@@ -20,16 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'login/static'),
-)
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_d_*#dey6_y@-$k9e%)ah0#fm&$^f#fx)2q@--wtb2_8x6u%-h'
 
@@ -88,6 +78,17 @@ WSGI_APPLICATION = 'RealProject2.wsgi.application'
 
 DATABASES = {
     'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'athena_db2',
+		'USER': 'root',
+		'PASSWORD': 'crazyworld',
+		'HOST': '127.0.0.1',
+		'PORT': '3306',
+    }
+}
+'''
+DATABASES = {
+    'default': {
 		'ENGINE': 'django.db.backends.postgresql',
 		'NAME': 'd7ru7rhctini5s',
 		'USER': 'javowsteoxoktp',
@@ -96,7 +97,7 @@ DATABASES = {
 		'PORT': '5432',
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -135,3 +136,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
