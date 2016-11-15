@@ -24,8 +24,9 @@
     }
     var expected_output = document.getElementById("expected_output").value;
     function getoutput(){   
-        output = document.getElementById("output").innerHTML;  
-        if (output.trim() == expected_output.trim())
+        output = document.getElementById("output").innerText; 
+        pattr = expected_output.trim();
+        if (output.trim().match(pattr) != null)
             document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
         else
             document.getElementById("status").src = "{% static 'homepage/images/x.png' %}";
