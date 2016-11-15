@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'RealProject2.wsgi.application'
 
 DATABASES = {
     'default': {
-		'ENGINE': 'django.db.backends.postgres',
+		'ENGINE': 'django.db.backends.postgresql',
 		'NAME': 'd7ru7rhctini5s',
 		'USER': 'javowsteoxoktp',
 		'PASSWORD': '77CPx9tFdsZWWItoLGeMaoQEfa',
