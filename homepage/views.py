@@ -15,11 +15,14 @@ def profile(request, username):
         #return HttpResponseRedirect(reverse('login:index'))
         return render(request, 'homepage/logout.html')
 
-def otherprofile(request, username):
-    return render(request, 'homepage/otherprofile.html',{"UserName":username})
+def otherprofile(request, fromWho, toWho):
+    return render(request, 'homepage/otherprofile.html',{"FromWhoName":fromWho,"ToWhoName":toWho})
     
 
 def logoutuser(request):
+    a = NewUser.objects.get(username = request.user.username)
+    a.isOnline = False
+    a.save()
     logout(request)
     return HttpResponseRedirect(reverse('login:index'))
 
