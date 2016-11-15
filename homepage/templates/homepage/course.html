@@ -12,13 +12,13 @@
         if (!isHidden){
             el.style.height = "10px";
             isHidden = true;
-            btn.src = "/static/homepage/images/unhide.png";
+            btn.src = "{% static 'homepage/images/unhide.png' %}";
             document.getElementById("content_pane").style.visibility = "hidden";
         }
         else{
             el.style.height = "40%";
             isHidden = false;
-            btn.src = "/static/homepage/images/hide.png"
+            btn.src = "{% static 'homepage/images/hide.png' %}";
             document.getElementById("content_pane").style.visibility = "visible"
         }
     }
@@ -26,9 +26,9 @@
     function getoutput(){   
         output = document.getElementById("output").innerHTML;  
         if (output.trim() == expected_output.trim())
-            document.getElementById("status").src = "/static/homepage/images/check.png";
+            document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
         else
-            document.getElementById("status").src = "/static/homepage/images/x.png";
+            document.getElementById("status").src = "{% static 'homepage/images/x.png' %}";
     }
     
     function toggleSidebar(el, other){
@@ -80,7 +80,7 @@
     <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
     <div class="main_lesson">
         <div class= "lesson_content">
-            <img id="showhidebtn" class="hide_lesson" src="/static/homepage/images/hide.png" onclick="showhidelesson(this, this.parentNode)">
+            <img id="showhidebtn" class="hide_lesson" src="{% static 'homepage/images/hide.png' %}" onclick="showhidelesson(this, this.parentNode)">
             <div id="content_pane">  
                 {% with template_name=loadlesson.content %}
                     {% include template_name %}
