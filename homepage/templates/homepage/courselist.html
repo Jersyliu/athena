@@ -12,7 +12,7 @@
     <div class = "course_block"> 
         <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}"class="course_link">
         <!--<p class = "course_title"> {{ i.course_name}} </p> -->
-        <img class = "course_image" src= {{i.image}}>
+        <img class = "course_image" src= "{% static i.image %}">
         <p class = "course_content">{{ i.num_of_lessons}} lessons </p>
         </a>
     </div>

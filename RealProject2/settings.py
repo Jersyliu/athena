@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,7 +86,18 @@ DATABASES = {
 		'PORT': '3306',
     }
 }
-
+'''
+DATABASES = {
+    'default': {
+		'ENGINE': 'django.db.backends.postgresql',
+		'NAME': 'd7ru7rhctini5s',
+		'USER': 'javowsteoxoktp',
+		'PASSWORD': '77CPx9tFdsZWWItoLGeMaoQEfa',
+		'HOST': 'ec2-54-243-249-149.compute-1.amazonaws.com',
+		'PORT': '5432',
+    }
+}
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -123,4 +135,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/login/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'login/static'),
+    os.path.join(BASE_DIR, 'homepage/static'),
+)
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
