@@ -15,6 +15,9 @@ def index(request):
 def dologin(request):
     username = request.POST['UserName']
     password = request.POST['PassWord']
+
+    if len(username) > 30:
+        return HttpResponseRedirect(reverse('login:index'))
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
@@ -36,6 +39,8 @@ def doregister(request):
         user = NewUser.objects.get(username = request.POST["UserName"])
         return render(request, 'login/register.html',{"Already_exist":True,"Password_Not_Match":False})
     except NewUser.DoesNotExist:
+        if len(request.POST["UserName"]) > 30:
+            return HttpResponseRedirect(reverse('login:register'))
         if request.POST["PassWord"] == request.POST["ConPassWord"]:
             user = NewUser.objects.create_user(username = request.POST["UserName"], password = request.POST["PassWord"])
             login(request, user)
