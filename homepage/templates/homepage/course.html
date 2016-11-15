@@ -71,7 +71,11 @@
         <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
         <p></p>
         <div id="qrs-pane">Quick Reference Sheet</div>
-        <div id="who-pane">Who's online </div>
+        <div id="who-pane">
+	        {% for i in whosOnline %}
+	        <li><a href="{% url 'homepage:otherprofile' i.username %}">{{ i.username }}</a></li> 
+	        {% endfor %}
+	    </div>
     </div>
     <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
     <div class="main_lesson">
