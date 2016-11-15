@@ -145,3 +145,8 @@ STATICFILES_DIRS = (
 )
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
