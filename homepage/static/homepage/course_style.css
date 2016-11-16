@@ -34,7 +34,7 @@ html, body, {
 }
 
 .lesson_content{
-    height:40%;
+    height:50%;
     border-bottom: solid;
     border-width: 1px;
     overflow: auto;

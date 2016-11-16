@@ -9,6 +9,7 @@ urlpatterns = [
         url(r'otherprofile/(?P<fromWho>[^/]+)/(?P<toWho>[^/]+)/$', views.otherprofile, name = 'otherprofile'),
         url(r'profile/(?P<username>[^/]+)/$', views.profile, name = 'profile'),
         url(r'logoutuser/$',views.logoutuser, name = 'logoutuser'),
-        url(r'courselist/(?P<username>[^/]+)/$', views.courseList, name = 'courseList'),  
+        url(r'courselist/(?P<username>[^/]+)/$', views.courseList, name = 'courseList'),
+        url(r'challenge/(?P<username>[^/]+)/(?P<coursename>[^/]+)/(?P<lessonname>[^/]+)/(?P<challengename>[^/]+)$', views.challenge, name = 'challenge')
 ]
 
