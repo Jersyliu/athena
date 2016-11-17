@@ -59,12 +59,20 @@
 </div>
 
     <div class="course_nav">
-        <p> {{CourseName}}
+        <p> {{CourseName}}</p>
         <ul class="lesson_list">
             {% for i in lessonDetail %}
-            <li class="lesson_item"><a href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                {% if i.lesson_name == loadlesson.lesson_name %}
+                    <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                {% else %}
+                    <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                {% endif %}
                 {% for j in i.challenge_set.all %}
-                <li type="square"><a href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                    {% if j.challenge_name == loadlesson.challenge_name and j.id == loadlesson.id %}
+                        <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                    {% else %}
+                        <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                    {% endif %}
                 {% endfor %}
             </li>  
             {% endfor %}
