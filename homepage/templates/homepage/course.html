@@ -24,8 +24,8 @@
     }
     var expected_output = document.getElementById("expected_output").value;
     function getoutput(){   
-        output = document.getElementById("output").innerText; 
-        pattr = expected_output.trim();
+        output = document.getElementById("output").innerHTML;  
+        pattr = expected_output.trim()
         if (output.trim().match(pattr) != null)
             document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
         else
@@ -59,10 +59,22 @@
 </div>
 
     <div class="course_nav">
-        <p> {{CourseName}}
+        <p> {{CourseName}}</p>
         <ul class="lesson_list">
             {% for i in lessonDetail %}
-            <li class="lesson_item"><a href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a></li>  
+                {% if i.lesson_name == loadlesson.lesson_name %}
+                    <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                {% else %}
+                    <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                {% endif %}
+                {% for j in i.challenge_set.all %}
+                    {% if j.challenge_name == loadlesson.challenge_name and j.id == loadlesson.id %}
+                        <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                    {% else %}
+                        <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </li>  
             {% endfor %}
         </ul>
     </div>
@@ -73,9 +85,14 @@
         <p></p>
         <div id="qrs-pane">Quick Reference Sheet</div>
         <div id="who-pane">
+            <table>
 	        {% for i in whosOnline %}
-	        <li><a href="{% url 'homepage:otherprofile' User.username i.username %}">{{ i.username }}</a></li> 
+            <tr>
+            <td><a href="#">{{ i.username }}</a></td>
+            <td><a href="{% url 'homepage:otherprofile' User.username i.username %}"><img src="{% static 'homepage/images/giphy.gif'%}"" style="height:32 ;width:32;"%}></a></td>
+            </tr> 
 	        {% endfor %}
+            </table>
 	    </div>
     </div>
     <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>

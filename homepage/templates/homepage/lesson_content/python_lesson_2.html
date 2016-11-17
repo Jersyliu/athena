@@ -1,0 +1,72 @@
+<h1><strong>Lesson 2</strong></h1>
+
+<h2><strong>Storing Data</strong></h2>
+
+<h2><strong>In Computer Applications</strong></h2>
+
+<p>When you do homework on a computer and save your work, you give it a name so you can find it later. This name can be anything you want it to be as long as you follow some rules. The name cannot have a /, \, *, ?, “, :, <, >, and | (on a Windows system). If you accidentally save another file with the same name, you’ll cry (because you just overwrote your homework!).</p>
+
+<p>Similarly, when you take pictures and transfer them to your computer, you can modify the picture names. The same rules apply, and the same overwriting effects can occur. </p>
+
+<h2>In Python</h2>
+
+<p>Storing data in Python is very much like storing files on your computer. In Python, the data is stored in variables. However, there are more rules that need to be followed. The variable name must:
+<p>
+Start w/ A-Z, a-z<br>
+Contain only A-Z, a-z, 0-9, _<br>
+Not contain spaces, punctuation, special characters, except _<br>
+</p>
+<p>
+Programs are written to be read and maintained by others (and you). Clarity is essential. The following are some examples of good variable names because they describe the data they’re storing.<br>
+robotSpeed<br>
+iceCreamPrice<br>
+distanceTraveled<br>
+mpg<br>
+high_score<br>
+</p>
+<p>
+The following are some examples of bad variable names:<br>
+high score – variable names cannot have spaces<br>
+robtSpd – confusing abbreviation<br>
+1stPlace – variable names cannot start with a digit<br>
+x – this variable name is not descriptive<br>
+o – this variable name is not descriptive and can be confused with a zero<br>
+</p>
+<p>
+To store data in a variable, use an equal sign. This operation is called assignment. To display the stored value, use print. For example:<br>
+distanceTraveled = 100<br>
+iceCreamPrice = 2.5<br>
+print distanceTraveled<br>
+print iceCreamPrice<br>
+</p>
+<p>
+Output:<br>
+100<br>
+2.5<br>
+</p>
+<p>
+In the example above, 100 was stored in the variable, distanceTraveled and 2.5 was stored in the variable, iceCreamPrice. Notice that the units are not specified. We don’t know if distanceTraveled is 100 miles or 100 kilometers. Just like in a calculator, the programmer is responsible for keeping track of the units. 
+</p>
+<p>
+Here is another example:<br>
+myHighScore = 777777<br>
+myRivalScore = 100000<br>
+print myHighScore<br>
+print myRivalScore<br>
+</p>
+<p>
+print "My rival played the game again"<br>
+myRivalScore = 999999<br>
+print myHighScore<br>
+print myRivalScore<br>
+</p>
+<p>
+Output:<br>
+777777<br>
+100000<br>
+My rival played the game again<br>
+777777<br>
+999999<br>
+</p>
+<p>
+In this example, note that similar to overwriting a file on a computer, the variable, myRivalScore, was overwritten to 999999. Notice that the value of myHighScore was unchanged because we did not assign it a new value.</p>

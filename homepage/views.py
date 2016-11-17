@@ -5,7 +5,7 @@ from django.http import Http404
 from django.urls import reverse
 from django.contrib.auth import logout
 
-from login.models import NewUser, Course, Lesson, Progress
+from login.models import NewUser, Course, Lesson, Progress, Challenge
 
 
 def profile(request, username):
@@ -42,3 +42,15 @@ def course(request, username, coursename, lessonname):
                "whosOnline":whosOnline
                }
     return render(request, 'homepage/course.html', context)
+
+def challenge(request, username, coursename, lessonname, challengename):
+    challenge = Lesson.objects.get(lesson_name=lessonname).challenge_set.get(challenge_name=challengename)
+    whosOnline = NewUser.objects.filter(isOnline = True)
+    context = {"CourseName": coursename,
+               "User":request.user,
+               "lessonDetail":Lesson.objects.filter(course__course_name=coursename),
+               "loadlesson":challenge,
+               "whosOnline":whosOnline
+               }
+    return render(request, 'homepage/course.html', context)
+    

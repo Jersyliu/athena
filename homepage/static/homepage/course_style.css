@@ -11,7 +11,7 @@ html, body, {
 
 .course_nav {
     float:left;
-    width:150px;
+    width:175px;
     height:90%;
     background-color: #e6e6ff;
     border-right:solid;
@@ -34,7 +34,7 @@ html, body, {
 }
 
 .lesson_content{
-    height:40%;
+    height:50%;
     border-bottom: solid;
     border-width: 1px;
     overflow: auto;
@@ -58,11 +58,28 @@ html, body, {
 .lesson_list{
     list-style-type:circle;
     font-weight:bold;
+    list-style:none;
+    margin-left: -20px;
+}
+
+.icon{
+    position:relative;
+    padding: 0px 14px 0px 0px;
+    top: 1px;
 }
 
 .lesson_item{
     padding-bottom:10px;
     cursor:pointer;
+    text-decoration:none;
+    color:black;
+}
+
+.current_lesson_item{
+    padding-bottom:10px;
+    cursor:pointer;
+    text-decoration:none;
+    color:blue;
 }
 
 .sidebar_btn{
