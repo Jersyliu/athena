@@ -69,13 +69,13 @@
             {% for i in lessonDetail %}                
                 {% if i.lesson_name == loadlesson.lesson_name %}                   
                     {% if i in progress %}
-                        <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                        <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a  class="current_lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
                     {% else %}                   
                         <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
                     {% endif %}
                 {% else %}              
                         {% if i in progress %}                                  
-                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
+                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
                         {% else %}                                
                             <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
                         {% endif %} 
@@ -83,13 +83,13 @@
                 {% for j in i.challenge_set.all %}
                     {% if j.challenge_name == loadlesson.challenge_name and j.id == loadlesson.id %}
                         {% if j in cprog %}
-                            <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                            <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
                         {% else %}
                             <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
                         {% endif %}
                     {% else %}
                         {% if j in cprog %}
-                            <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+                            <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
                         {% else %}
                             <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
                         {% endif %}                    
