@@ -60,13 +60,19 @@ def course(request, username, coursename, lessonname):
         Text = ""
     else:
         Text = p[0].progress_until_now
+    completeprogresses = Progress.objects.filter(newuser__username=username, is_complete=True)
+    completeLesson = [i.lesson for i in completeprogresses]
+    completeCprogresses = ChallengeProgress.objects.filter(newuser__username=username, is_complete=True)
+    completeChallenges = [i.challenge for i in completeCprogresses]
     context = {"CourseName": coursename,
                "User":request.user,
                "lessonDetail":Lesson.objects.filter(course__course_name=coursename),
                "loadlesson":lesson,
                "whosOnline":whosOnline,
                "isLesson": "true",
-               "Text":Text
+               "Text":Text,
+               "progress": completeLesson,
+               "cprog": completeChallenges
                }
     return render(request, 'homepage/course.html', context)
 
@@ -82,13 +88,20 @@ def challenge(request, username, coursename, lessonname, challengename):
         Text = ""
     else:
         Text = p[0].progress_until_now
+        
+    completeprogresses = Progress.objects.filter(newuser__username=username, is_complete=True)
+    completeLesson = [i.lesson for i in completeprogresses]
+    completeCprogresses = ChallengeProgress.objects.filter(newuser__username=username, is_complete=True)
+    completeChallenges = [i.challenge for i in completeCprogresses]
     context = {"CourseName": coursename,
                "User":request.user,
                "lessonDetail":Lesson.objects.filter(course__course_name=coursename),
                "loadlesson":challenge,
                "whosOnline":whosOnline,
                "isLesson": "false",
-               "Text":Text
+               "Text":Text,
+               "progress": completeLesson,
+               "cprog": completeChallenges
                }
     return render(request, 'homepage/course.html', context)
 
@@ -104,7 +117,7 @@ def keepprogress(request, username, lessonname):
             p = Progress.objects.get(newuser__username = username, lesson__lesson_name = lessonname)
             p.progress_until_now = request.POST["inputcode"]
             p.save()
-        if request.POST["isC"] == True:
+        if request.POST["isC"] == "true":
             p.is_complete = True
             p.save()
         return HttpResponse("")
@@ -121,7 +134,7 @@ def keepprogress(request, username, lessonname):
             p = ChallengeProgress.objects.get(newuser__username = username, challenge__challenge_name = lessonname)
             p.progress_until_now = request.POST["inputcode"]
             p.save()
-        if request.POST["isC"] == True:
+        if request.POST["isC"] == "true":
             p.is_complete = True
             p.save()
         return HttpResponse("")

@@ -34,7 +34,7 @@ class Progress(models.Model):
     is_complete = models.BooleanField(default=False)
     progress_until_now = models.CharField(max_length=20000)
     def __str__(self):
-        return self.newuser.username+";"+self.progress_until_now
+        return  str(self.id) + ";" + self.newuser.username+";"+self.progress_until_now
 
 class Challenge(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)

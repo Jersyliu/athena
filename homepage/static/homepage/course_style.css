@@ -82,6 +82,15 @@ html, body, {
     color:blue;
 }
 
+.lesson_complete{
+    background: url('images/check.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: 16px 16px;
+    color:green;
+}
+
 .sidebar_btn{
     width:49%;
     padding: 10px;
