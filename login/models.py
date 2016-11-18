@@ -56,7 +56,7 @@ class CourseLocation(models.Model):
     newuser = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     islessonornot = models.BooleanField(default=False)
-    whichone = models.IntegerField(default=0)
+    whichone = models.CharField(max_length=200)
 
 
     
