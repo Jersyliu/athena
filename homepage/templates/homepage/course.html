@@ -64,7 +64,6 @@
 
     <div class="course_nav">
         <p> {{CourseName}}</p>
-        {{cprog}}
         <ul class="lesson_list">
             {% for i in lessonDetail reversed %}                
                 {% if i.lesson_name == loadlesson.lesson_name %}                   
@@ -128,7 +127,6 @@
         </div>
         <div class= "coding_practice">
             <p> Write your code here: </p>
-            {{ isLesson }}
             {% if loadlesson.lesson_name %}
             {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
             {% elif loadlesson.challenge_name %}
