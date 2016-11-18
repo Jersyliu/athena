@@ -11,3 +11,4 @@ admin.site.register(Progress)
 admin.site.register(Challenge)
 admin.site.register(ChallengeProgress)
 admin.site.register(CourseLocation)
+
