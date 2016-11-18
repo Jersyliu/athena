@@ -44,6 +44,23 @@ class Challenge(models.Model):
     def __str__(self):
         return self.lesson.lesson_name+";"+self.challenge_name
 
+class ChallengeProgress(models.Model):
+    newuser = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
+    is_complete = models.BooleanField(default=False)
+    progress_until_now = models.CharField(max_length=20000)
+    def __str__(self):
+        return self.newuser.username+";"+self.progress_until_now
+
+class CourseLocation(models.Model):
+    newuser = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    islessonornot = models.BooleanField(default=False)
+    whichone = models.IntegerField(default=0)
+
+
+    
+
 
 
 

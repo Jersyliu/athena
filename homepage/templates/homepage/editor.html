@@ -60,10 +60,15 @@ function runit() {
 } 
 </script> 
 
-<form>
-<textarea id=lessoncode>
+<!-- <form action="{% url 'homepage:keepprogress' Username Lessonname %}" method="post"> -->
+<form id="code">
+{% csrf_token %}
+<p>{{ Username }} {{ Lessonname }} {{ isL }}</p>
+<textarea id="lessoncode">
+{{ Text }}
 </textarea>
-<button type="button" onclick="runit(), getoutput()">Run</button> 
+<!-- <button type="button" onclick="runit(), getoutput()">Run</button> -->
+<input type="submit" value="Run" onclick="runit(), getoutput()">
 </form> 
 <p>output: <img id="status"></p>
 <pre id="output" ></pre> 
@@ -76,3 +81,27 @@ function runit() {
       indentUnit: "4"
     });
   </script>
+
+<script type="text/javascript">
+  $(document).on('submit','#code',function(e){
+    e.preventDefault();
+    $.ajax({
+      type:"POST",
+      url:"{% url 'homepage:keepprogress' Username Lessonname %}",
+      data:{
+        inputcode:$("#lessoncode").val(),
+        haha: {{ isL }},
+        isC: getoutput(),
+        csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
+      },
+      success:function(){
+        alert("hahahaha");
+      }
+    });
+  });
+</script>
+
+
+
+
+

@@ -26,10 +26,14 @@
     function getoutput(){   
         output = document.getElementById("output").innerHTML;  
         pattr = expected_output.trim()
-        if (output.trim().match(pattr) != null)
+        if (output.trim().match(pattr) != null){
             document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
-        else
+            return true;
+        }
+        else {
             document.getElementById("status").src = "{% static 'homepage/images/x.png' %}";
+            return false;
+        }
     }
     
     function toggleSidebar(el, other){
@@ -86,14 +90,14 @@
         <div id="qrs-pane">Quick Reference Sheet</div>
         <div id="who-pane">
             <table>
-	        {% for i in whosOnline %}
+            {% for i in whosOnline %}
             <tr>
             <td><a href="#">{{ i.username }}</a></td>
             <td><a href="{% url 'homepage:otherprofile' User.username i.username %}"><img src="{% static 'homepage/images/giphy.gif'%}"" style="height:32 ;width:32;"%}></a></td>
             </tr> 
-	        {% endfor %}
+            {% endfor %}
             </table>
-	    </div>
+        </div>
     </div>
     <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
     <div class="main_lesson">
@@ -107,7 +111,12 @@
         </div>
         <div class= "coding_practice">
             <p> Write your code here: </p>
-            {% include './editor.html' %}
+            {{ isLesson }}
+            {% if loadlesson.lesson_name %}
+            {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
+            {% elif loadlesson.challenge_name %}
+            {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text %}
+            {% endif %}
         </div>
     </div>    
 </body>
