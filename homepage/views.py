@@ -30,10 +30,30 @@ def courseList(request, username):
     return render(request, 'homepage/courselist.html', {"CourseClass":Course.objects.all(),"User":request.user})
     
 def course(request, username, coursename, lessonname):
+    CL = CourseLocation.objects.filter(newuser__username=username, course__course_name=coursename)
+    l = Lesson.objects.filter(lesson_name=lessonname)
+    if len(CL) == 0:
+        lesson = Lesson.objects.filter(course__course_name=coursename)[0]
+        cl = CourseLocation(newuser=NewUser.objects.get(username=username), course=Course.objects.get(course_name=coursename), islessonornot=True, whichone=lesson.lesson_name)
+        cl.save()
+    elif CL[0].islessonornot == False and len(l) == 0:
+        return HttpResponseRedirect(reverse('homepage:challenge',args=(username,coursename,lessonname,CL[0].whichone)))
+    else:
+#        cl = CourseLocation.objects.get(newuser__username=username, course__course_name=coursename)
+        cl = CL[0]
+        if coursename == lessonname:
+            lesson = Lesson.objects.get(lesson_name=cl.whichone)
+        else:
+            lesson = Lesson.objects.get(lesson_name=lessonname)
+            cl.whichone = lesson.lesson_name
+            cl.islessonornot = True
+            cl.save()
+    '''
     if coursename == lessonname:
         lesson = Lesson.objects.filter(course__course_name=coursename)[0]
     else:
         lesson = Lesson.objects.get(lesson_name=lessonname)
+    '''
     whosOnline = NewUser.objects.filter(isOnline = True)
     p = Progress.objects.filter(newuser__username=username, lesson__lesson_name=lessonname)
     if len(p) == 0:
@@ -51,7 +71,11 @@ def course(request, username, coursename, lessonname):
     return render(request, 'homepage/course.html', context)
 
 def challenge(request, username, coursename, lessonname, challengename):
-    challenge = Lesson.objects.get(lesson_name=lessonname).challenge_set.get(challenge_name=challengename)
+    challenge = Challenge.objects.get(challenge_name=challengename)
+    cl = CourseLocation.objects.get(newuser__username=username, course__course_name=coursename)
+    cl.whichone = challenge.challenge_name
+    cl.islessonornot = False
+    cl.save()
     whosOnline = NewUser.objects.filter(isOnline = True)
     p = ChallengeProgress.objects.filter(newuser__username=username, challenge__challenge_name=challengename)
     if len(p) == 0:

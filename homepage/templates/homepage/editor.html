@@ -63,7 +63,6 @@ function runit() {
 <!-- <form action="{% url 'homepage:keepprogress' Username Lessonname %}" method="post"> -->
 <form id="code">
 {% csrf_token %}
-<p>{{ Username }} {{ Lessonname }} {{ isL }}</p>
 <textarea id="lessoncode">
 {{ Text }}
 </textarea>
