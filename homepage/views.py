@@ -10,13 +10,24 @@ from login.models import NewUser, Course, Lesson, Progress, Challenge, Challenge
 
 def profile(request, username):
     if request.user.is_authenticated:
-        return render(request, 'homepage/profile.html',{"UserName":request.user.username})
+        context = {
+            "UserName":request.user.username,
+            "Progress":Progress.objects.filter(newuser__username=username),
+            "CProgress":ChallengeProgress.objects.filter(newuser__username=username)
+            }
+        return render(request, 'homepage/profile.html',context)
     else:
         #return HttpResponseRedirect(reverse('login:index'))
         return render(request, 'homepage/logout.html')
 
 def otherprofile(request, fromWho, toWho):
-    return render(request, 'homepage/otherprofile.html',{"FromWhoName":fromWho,"ToWhoName":toWho})
+    context = {
+        "ToWhoName":toWho,
+        "Progress":Progress.objects.filter(newuser__username=toWho),
+        "CProgress":ChallengeProgress.objects.filter(newuser__username=toWho),
+        "FromWhoName":fromWho
+        }
+    return render(request, 'homepage/otherprofile.html', context)
     
 
 def logoutuser(request):
@@ -54,7 +65,14 @@ def course(request, username, coursename, lessonname):
     else:
         lesson = Lesson.objects.get(lesson_name=lessonname)
     '''
-    whosOnline = NewUser.objects.filter(isOnline = True)
+    #whosOnline = NewUser.objects.filter(isOnline = True)
+    whosOnline = []
+    alluser = NewUser.objects.all()
+    for i in alluser:
+        if i.username in request.session:
+            whosOnline.append(NewUser.objects.get(username = i.username))
+
+
     p = Progress.objects.filter(newuser__username=username, lesson__lesson_name=lessonname)
     if len(p) == 0:
         Text = ""
@@ -82,7 +100,14 @@ def challenge(request, username, coursename, lessonname, challengename):
     cl.whichone = challenge.challenge_name
     cl.islessonornot = False
     cl.save()
-    whosOnline = NewUser.objects.filter(isOnline = True)
+    #whosOnline = NewUser.objects.filter(isOnline = True)
+    whosOnline = []
+    alluser = NewUser.objects.all()
+    for i in alluser:
+        if i.username in request.session:
+            whosOnline.append(NewUser.objects.get(username = i.username))
+
+    
     p = ChallengeProgress.objects.filter(newuser__username=username, challenge__challenge_name=challengename)
     if len(p) == 0:
         Text = ""
