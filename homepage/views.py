@@ -4,8 +4,27 @@ from django.template import loader
 from django.http import Http404
 from django.urls import reverse
 from django.contrib.auth import logout
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 from login.models import NewUser, Course, Lesson, Progress, Challenge, ChallengeProgress, CourseLocation
+
+
+
+def get_all_logged_in_users():
+    # Query all non-expired sessions
+    # use timezone.now() instead of datetime.now() in latest versions of Django
+    sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    uid_list = []
+
+    # Build a list of user ids from that query
+    for session in sessions:
+        data = session.get_decoded()
+        uid_list.append(data.get('_auth_user_id', None))
+
+    # Query all logged in users based on id list
+    return NewUser.objects.filter(id__in=uid_list)
+
 
 
 def profile(request, username):
@@ -38,6 +57,12 @@ def logoutuser(request):
     return HttpResponseRedirect(reverse('login:index'))
 
 def courseList(request, username):
+    '''
+    s = 'haha'
+    for i in request.session.keys():
+        s += str(i)+"  "+str(request.session[i])+"<br>"
+    return HttpResponse(s)
+    '''
     return render(request, 'homepage/courselist.html', {"CourseClass":Course.objects.all(),"User":request.user})
     
 def course(request, username, coursename, lessonname):
@@ -66,11 +91,14 @@ def course(request, username, coursename, lessonname):
         lesson = Lesson.objects.get(lesson_name=lessonname)
     '''
     #whosOnline = NewUser.objects.filter(isOnline = True)
+    '''
     whosOnline = []
     alluser = NewUser.objects.all()
     for i in alluser:
         if i.username in request.session:
             whosOnline.append(NewUser.objects.get(username = i.username))
+    '''
+    whosOnline = get_all_logged_in_users()
 
 
     p = Progress.objects.filter(newuser__username=username, lesson__lesson_name=lessonname)
@@ -101,11 +129,14 @@ def challenge(request, username, coursename, lessonname, challengename):
     cl.islessonornot = False
     cl.save()
     #whosOnline = NewUser.objects.filter(isOnline = True)
+    '''
     whosOnline = []
     alluser = NewUser.objects.all()
     for i in alluser:
         if i.username in request.session:
             whosOnline.append(NewUser.objects.get(username = i.username))
+    '''
+    whosOnline = get_all_logged_in_users()
 
     
     p = ChallengeProgress.objects.filter(newuser__username=username, challenge__challenge_name=challengename)
