@@ -26,7 +26,7 @@ SECRET_KEY = '_d_*#dey6_y@-$k9e%)ah0#fm&$^f#fx)2q@--wtb2_8x6u%-h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [athenaproject2016.herokuapp.com]
+ALLOWED_HOSTS = []
 
 
 # Application definition
