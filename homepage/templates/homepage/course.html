@@ -463,7 +463,7 @@
                                             </div>
                                             <div id="mck-group-create-icon-loading"
                                                 class="mck-loading n-vis">
-                                                <img src="{% static 'homepage/applozic/images/mck-loading.png' %}" alt="Loading" />
+                                                <img src="{% static 'homepage/applozic/images/mck-loading.gif' %}" alt="Loading" />
                                             </div> <input id="mck-group-icon-upload"
                                             class="mck-group-icon-upload n-vis" type="file"
                                             name="files[]">
@@ -532,7 +532,7 @@
                                             class="mck-overlay-label">Change Group Icon</span>
                                     </div>
                                     <div id="mck-group-info-icon-loading" class="mck-loading vis">
-                                        <img src="{% static 'homepage/applozic/images/mck-loading.png' %}" alt="Loading" />
+                                        <img src="{% static 'homepage/applozic/images/mck-loading.gif' %}" alt="Loading" />
                                     </div> <input id="mck-group-icon-change"
                                     class="mck-group-icon-change n-vis" type="file" name="file[]" />
                                 </span>
@@ -769,8 +769,8 @@
                             $applozic.fn
                                     .applozic({
                                         userId : {{ User.id }},
-                                        userName : {{ User.username }},
-                                        appId : '1e0297f284a6354f482264e4c858ebfe4',
+                                        userName : '{{ User.username }}',
+                                        appId : '19112117a20c95548563ebfd1a93a1eb9',
                                         ojq : $original,
                                         obsm : oModal,
                                         notificationIconLink : "https://www.applozic.com/resources/images/applozic_icon.png",

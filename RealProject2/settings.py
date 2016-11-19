@@ -26,7 +26,7 @@ SECRET_KEY = '_d_*#dey6_y@-$k9e%)ah0#fm&$^f#fx)2q@--wtb2_8x6u%-h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*","athenaproject2016.herokuapp.com"]
 
 
 # Application definition
@@ -136,13 +136,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/login/static/'
+STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'login/static'),
-    os.path.join(BASE_DIR, 'homepage/static'),
-)
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'login/static'),
+#    os.path.join(BASE_DIR, 'homepage/static'),
+#)
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
@@ -150,3 +150,26 @@ DATABASES['default'].update(db_from_env)
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO'
+        },
+        'chat': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'DEBUG',
+        },
+    },
+}
