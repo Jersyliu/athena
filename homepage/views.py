@@ -138,4 +138,13 @@ def keepprogress(request, username, lessonname):
             p.is_complete = True
             p.save()
         return HttpResponse("")
-        
+
+
+def chat(request, fromID, fromName, toID, toName):
+    context = {
+        "fromID": fromID,
+        "fromName": fromName,
+        "toID": toID,
+        "toName": toName
+        }
+    return render(request, 'homepage/chat/fullview.html', context)
