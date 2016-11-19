@@ -39,8 +39,11 @@ def doregister(request):
         user = NewUser.objects.get(username = request.POST["UserName"])
         return render(request, 'login/register.html',{"Already_exist":True,"Password_Not_Match":False})
     except NewUser.DoesNotExist:
-        if len(request.POST["UserName"]) > 30 or "/" in request.POST["UserName"]:
+        if len(request.POST["UserName"]) > 30:
             return HttpResponseRedirect(reverse('login:register'))
+        for i in "/#?*+- ":
+            if i in request.POST["UserName"]:
+                return HttpResponseRedirect(reverse('login:register'))
         if request.POST["PassWord"] == request.POST["ConPassWord"]:
             user = NewUser.objects.create_user(username = request.POST["UserName"], password = request.POST["PassWord"])
             login(request, user)

@@ -143,7 +143,7 @@ def keepprogress(request, username, lessonname):
 def chat(request, fromID, fromName, toID, toName):
     context = {
         "fromID": fromID,
-        "fromName": fromName,
+        "fromName": str(fromName),
         "toID": toID,
         "toName": toName
         }
