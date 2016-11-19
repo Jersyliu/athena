@@ -26,7 +26,7 @@ SECRET_KEY = '_d_*#dey6_y@-$k9e%)ah0#fm&$^f#fx)2q@--wtb2_8x6u%-h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*","athenaproject2016.herokuapp.com"]
 
 
 # Application definition
@@ -156,14 +156,20 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'null': {
-        'class': 'logging.NullHandler',
+        'console': {
+            'class': 'logging.StreamHandler',
         },
-        },
+    },
     'loggers': {
-        'django.security.DisallowedHost': {
-            'handlers': ['null'],
-            'propagate': False,
-            },
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO'
         },
-    }
+        'chat': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'DEBUG',
+        },
+    },
+}
