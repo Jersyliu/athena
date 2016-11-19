@@ -4,19 +4,49 @@ from django.template import loader
 from django.http import Http404
 from django.urls import reverse
 from django.contrib.auth import logout
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 from login.models import NewUser, Course, Lesson, Progress, Challenge, ChallengeProgress, CourseLocation
 
 
+
+def get_all_logged_in_users():
+    # Query all non-expired sessions
+    # use timezone.now() instead of datetime.now() in latest versions of Django
+    sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    uid_list = []
+
+    # Build a list of user ids from that query
+    for session in sessions:
+        data = session.get_decoded()
+        uid_list.append(data.get('_auth_user_id', None))
+
+    # Query all logged in users based on id list
+    return NewUser.objects.filter(id__in=uid_list)
+
+
+
 def profile(request, username):
     if request.user.is_authenticated:
-        return render(request, 'homepage/profile.html',{"UserName":request.user.username})
+        context = {
+            "UserName":request.user.username,
+            "Progress":Progress.objects.filter(newuser__username=username),
+            "CProgress":ChallengeProgress.objects.filter(newuser__username=username)
+            }
+        return render(request, 'homepage/profile.html',context)
     else:
         #return HttpResponseRedirect(reverse('login:index'))
         return render(request, 'homepage/logout.html')
 
 def otherprofile(request, fromWho, toWho):
-    return render(request, 'homepage/otherprofile.html',{"FromWhoName":fromWho,"ToWhoName":toWho})
+    context = {
+        "ToWhoName":toWho,
+        "Progress":Progress.objects.filter(newuser__username=toWho),
+        "CProgress":ChallengeProgress.objects.filter(newuser__username=toWho),
+        "FromWhoName":fromWho
+        }
+    return render(request, 'homepage/otherprofile.html', context)
     
 
 def logoutuser(request):
@@ -27,6 +57,12 @@ def logoutuser(request):
     return HttpResponseRedirect(reverse('login:index'))
 
 def courseList(request, username):
+    '''
+    s = 'haha'
+    for i in request.session.keys():
+        s += str(i)+"  "+str(request.session[i])+"<br>"
+    return HttpResponse(s)
+    '''
     return render(request, 'homepage/courselist.html', {"CourseClass":Course.objects.all(),"User":request.user})
     
 def course(request, username, coursename, lessonname):
@@ -54,7 +90,17 @@ def course(request, username, coursename, lessonname):
     else:
         lesson = Lesson.objects.get(lesson_name=lessonname)
     '''
-    whosOnline = NewUser.objects.filter(isOnline = True)
+    #whosOnline = NewUser.objects.filter(isOnline = True)
+    '''
+    whosOnline = []
+    alluser = NewUser.objects.all()
+    for i in alluser:
+        if i.username in request.session:
+            whosOnline.append(NewUser.objects.get(username = i.username))
+    '''
+    whosOnline = get_all_logged_in_users()
+
+
     p = Progress.objects.filter(newuser__username=username, lesson__lesson_name=lessonname)
     if len(p) == 0:
         Text = ""
@@ -82,7 +128,17 @@ def challenge(request, username, coursename, lessonname, challengename):
     cl.whichone = challenge.challenge_name
     cl.islessonornot = False
     cl.save()
-    whosOnline = NewUser.objects.filter(isOnline = True)
+    #whosOnline = NewUser.objects.filter(isOnline = True)
+    '''
+    whosOnline = []
+    alluser = NewUser.objects.all()
+    for i in alluser:
+        if i.username in request.session:
+            whosOnline.append(NewUser.objects.get(username = i.username))
+    '''
+    whosOnline = get_all_logged_in_users()
+
+    
     p = ChallengeProgress.objects.filter(newuser__username=username, challenge__challenge_name=challengename)
     if len(p) == 0:
         Text = ""

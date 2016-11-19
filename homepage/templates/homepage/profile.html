@@ -1,4 +1,89 @@
 {% load static %}
+
+    
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+/*
+var validNavigation = false;
+
+function wireUpEvents() {
+var dont_confirm_leave = 0; //set dont_confirm_leave to 1 when you want the    user to be able to leave withou confirmation
+var leave_message = 'ServerThemes.Net Recommend BEST WEB HOSTING at new tab  window. Good things will come to you'
+function goodbye(e) {
+    console.log(validNavigation);
+    if (!validNavigation) {
+        $.ajax({
+            type:"GET",
+            url:"{% url 'homepage:logoutuser' %}",
+            data:{
+                haha:{{ UserName }},
+                csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
+            },
+            success:function(){
+                alert("sss");
+
+            }
+        });
+        return leave_message;
+    };
+    
+}
+
+function CallbackFunction(e) {
+    e = window.event || e;
+    if(e){
+        console.log(e.clientX+","+e.clientY);
+    }
+    else {
+
+        console.log("jajaja");
+        return "sss";
+
+           // want some condition here so that I can differentiate between whether refresh button is clicked or back button is clicked.             
+    }
+}
+
+//window.closed=goodbye;
+//window.onbeforeunload = function() {
+//    return "Did you save your stuff?"
+//};
+
+// Attach the event keypress to exclude the F5 refresh
+$(document).bind('keypress', function(e) {
+    if (e.keyCode == 116){
+        validNavigation = true;
+    }
+});
+
+// Attach the event click for all links in the page
+$("a").bind("click", function() {
+    validNavigation = true;
+});
+// Attach the event submit for all forms in the page
+$("form").bind("submit", function() {
+    validNavigation = true;
+});
+
+// Attach the event click for all inputs in the page
+$("input").bind("click", function() {
+    validNavigation = true;
+});
+
+
+window.onbeforeunload = CallbackFunction;
+
+//window.onbeforeunload = goodbye;
+
+}
+
+  // Wire up the events as soon as the DOM tree is ready
+$(document).ready(function() {
+    wireUpEvents();
+});*/
+</script>
+
+
+
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
 
 <div class="titleAthena">
@@ -15,14 +100,24 @@
     <div class="listoptions">
         <ul>
             <li><a href="#"><label>>> </label>Course in Progress</a></li>
-            <li><a href="{% url 'homepage:courseList' UserName %}"><label>>> </label>Start New Course</a></li>
+            <li><a href="{% url 'homepage:courseList' UserName %}"><label> >> </label>Course List</a></li>
         </ul>
     </div>
+<input type=button value="Go back" onClick="window.history.back();return false;">
 <a class="abutton" href="{% url 'homepage:logoutuser' %}">Logout</a>
 </div>
 
 <div class="newsfeed">
     <div class="newscontent">
-        <h1> What your class has been up to... </h1>
+        <h1> This is your progress:</h1>
+        <p>Lesson Completed:</p>
+        {% for i in Progress %}
+        <p>{{ i.lesson.lesson_name }} : {{ i.is_complete }}</p>
+        {% endfor %}
+        <br><br>
+        <p>Challenge Completed:</p>
+        {% for i in CProgress %}
+        <p>{{ i.challenge.challenge_name }} : {{ i.is_complete }}</p>
+        {% endfor %}
     </div>
 </div>

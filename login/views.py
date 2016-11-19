@@ -22,6 +22,7 @@ def dologin(request):
     if user is not None:
         login(request, user)
         a = NewUser.objects.get(username = username)
+        request.session[str(a.username)] = "1"
         a.isOnline = True
         a.save()
         return HttpResponseRedirect(reverse('homepage:courseList',args = (request.POST["UserName"],)))
@@ -48,6 +49,7 @@ def doregister(request):
             user = NewUser.objects.create_user(username = request.POST["UserName"], password = request.POST["PassWord"])
             login(request, user)
             a = NewUser.objects.get(username = user.username)
+            request.session[str(a.username)] = "1"
             a.isOnline = True
             a.save()
             return HttpResponseRedirect(reverse('homepage:courseList',args = (request.POST["UserName"],)))

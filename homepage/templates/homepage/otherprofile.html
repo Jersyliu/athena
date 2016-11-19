@@ -19,5 +19,21 @@
     <div class="newscontent">
         <h1> Here is the milestone</h1>
     </div>
-    <a class="username" href="{% url 'homepage:courseList' FromWhoName %}">Go Back</a>
+    <input type=button value="Go back" onClick="window.history.back();return false;">
 </div>
+
+<div>
+    <div>
+        <h1> This is {{ ToWhoName }}'s progress:</h1>
+        <p>Lesson Completed:</p>
+        {% for i in Progress %}
+        <p>{{ i.lesson.lesson_name }} : {{ i.is_complete }}</p>
+        {% endfor %}
+        <br><br>
+        <p>Challenge Completed:</p>
+        {% for i in CProgress %}
+        <p>{{ i.challenge.challenge_name }} : {{ i.is_complete }}</p>
+        {% endfor %}
+    </div>
+</div>
+
