@@ -1,10 +1,10 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
 
-<div class="titleAthena">
-    <span float="left"><h1 class="titleText"> ATHENA </h1></span>
-    <p class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{ User.username }}</a></p>
-</div>
+    <div class="titleAthena">
+        <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span>
+        <span class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></span>        
+    </div>
 
  <h1>Course List: </h1>
 

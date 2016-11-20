@@ -11,20 +11,13 @@ body {
     width:100%
 }
 
-html, body, {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    overflow: hidden;
-}
+
 
 .titleAthena{
     display:block;
     margin:0px;
-    background-color: darkorange;
-    height: 60px;
+    background-color: fb8f00;
+    height: 50px;
     font-weight:normal;
 }
 .titleText{
@@ -39,6 +32,9 @@ html, body, {
     float:right;
     display: inline;
     font-size:18px;
+    position:relative;
+    top: 10px;
+    right: 60px;
 }
 
 .username{
@@ -183,4 +179,41 @@ td{
 .spacing{
     float:left;
     padding: 10px;
+}
+
+.addPadding{
+    padding: 0px 20px 0px 10px
+}
+
+.Course_Name{
+    position: relative;
+    left: 140px;
+    top:-5px;
+    font-family: Ubuntu;
+    font-size: 38px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 2.5px;
+    color: #ffffff;
+    
+}
+
+.Lesson_Name{
+    position: relative;
+    left: 160px;
+    top:-5px;
+    font-family: Ubuntu;
+    font-size: 35px;
+    font-weight: 55000;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 2.5px;
+    color: #19202e;
+}
+
+.format_logo{
+    position:relative;
+    left:30px;
+    top:5px;
 }

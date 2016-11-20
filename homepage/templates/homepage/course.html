@@ -58,18 +58,18 @@
     function toggleSidebar(el, other){
         other.style.backgroundColor= "darkorange";
         other.style.color = "white";
-        el.style.backgroundColor = "#e6e6ff";
+        el.style.backgroundColor = "#f9f9f9";
         el.style.color = "grey";
         if (el.name == 'qrs'){
             document.getElementById("who-pane").style.visibility = "hidden";
             document.getElementById("qrs-pane").style.visibility = "visible";
-            document.getElementById("qrs-pane").style.height = "100%";
+            document.getElementById("qrs-pane").style.height = "auto";
             document.getElementById("who-pane").style.height = "0px";            
         }
         else{
             document.getElementById("qrs-pane").style.visibility = "hidden";
             document.getElementById("who-pane").style.visibility = "visible"; 
-            document.getElementById("who-pane").style.height = "100%";
+            document.getElementById("who-pane").style.height = "auto";
             document.getElementById("qrs-pane").style.height = "0px";                
         }
     }
@@ -77,84 +77,93 @@
 </head>
 <body>
     <div class="titleAthena">
-        <span><h1 class="titleText"> ATHENA </h1></span>
-        <p class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></p>
+        <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span><span class="Course_Name">{{CourseName}}</span><span class="Lesson_Name">{{loadlesson.lesson_name}}</span></span>
+        <span class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></span>        
     </div>
-
-    <div class="course_nav">
-        <p> {{CourseName}}</p>
-        <ul class="lesson_list">
-            {% for i in lessonDetail reversed %}                
-                {% if i.lesson_name == loadlesson.lesson_name %}                   
-                    {% if i in progress %}
-                        <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a  class="current_lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
-                    {% else %}                   
-                        <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
-                    {% endif %}
-                {% else %}              
-                        {% if i in progress %}                                  
-                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
-                        {% else %}                                
-                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a>
-                        {% endif %} 
-                {% endif %}
-                {% for j in i.challenge_set.all reversed %}
-                    {% if j.challenge_name == loadlesson.challenge_name and j.id == loadlesson.id %}
-                        {% if j in cprog %}
-                            <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
-                        {% else %}
-                            <li class="current_lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
+    <div class="page" id="page">
+        <div class="course_nav">
+            <ul class="lesson_list">
+                {% for i in lessonDetail reversed %}                
+                    {% if i.lesson_name == loadlesson.lesson_name %}                   
+                        {% if i in progress %}
+                            <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a  class="current_lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}"></li><div name="lines" class="complete_line"> &nbsp;</div>
+                        {% else %}                   
+                            <li class="current_lesson_item"><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="current_lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a></li><div name="lines" class="incomplete_line"> &nbsp;</div>
                         {% endif %}
-                    {% else %}
-                        {% if j in cprog %}
-                            <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}">
-                        {% else %}
-                            <li class="lesson_item" ><img class="icon" src= "{% static 'homepage/images/square.png' %}"><a class="lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li>
-                        {% endif %}                    
+                    {% else %}              
+                        {% if i in progress %}                                  
+                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/complete_square.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}"></li><div name="lines" class="complete_line"> &nbsp;</div>
+                        {% else %}                                
+                            <li class="lesson_item"><img class="icon" src= "{% static 'homepage/images/incomplete_square.png' %}"><a class="lesson_item" href="{% url 'homepage:course' User CourseName i.lesson_name %}">{{ i.lesson_name }}</a></li><div name="lines" class="incomplete_line"> &nbsp;</div>
+                        {% endif %} 
                     {% endif %}
+                    {% for j in i.challenge_set.all reversed %}
+                        {% if j.challenge_name == loadlesson.challenge_name and j.id == loadlesson.id %}
+                            {% if j in cprog %}
+                                <li class="current_lesson_item" ><img class="challenge_icon" src= "{% static 'homepage/images/circles.png' %}"><a class="current_lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}"></li><div name="lines" class="complete_line">&nbsp;</div>
+                            {% else %}
+                                <li class="current_lesson_item" ><img class="challenge_icon" src= "{% static 'homepage/images/circles.png' %}"><a class="current_lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li><div name="lines" class="incomplete_line">&nbsp;</div>
+                            {% endif %}
+                        {% else %}
+                            {% if j in cprog %}
+                                <li class="lesson_item" ><img class="challenge_icon" src= "{% static 'homepage/images/complete_circles.png' %}"><a class="lesson_item lesson_complete" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a><img height="16" width= "16" src = "{% static 'homepage/images/check.png' %}"></li><div name="lines" class="complete_line">&nbsp;</div>
+                            {% else %}
+                                <li class="lesson_item" ><img class="challenge_icon" src= "{% static 'homepage/images/incomplete_circles.png' %}"><a class="lesson_item" href="{% url 'homepage:challenge' User CourseName i.lesson_name j.challenge_name %}">{{ j.challenge_name }}</a></li><div name="lines" class="incomplete_line">&nbsp;</div>
+                            {% endif %} 
+                        {% endif %}
+                    {% endfor %}                   
                 {% endfor %}
-            </li>  
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="lesson_sidebar">
-        <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
-        <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
-        <p></p>
-        <div id="qrs-pane">Quick Reference Sheet</div>
-        <div id="who-pane">
-            <table>
-            {% for i in whosOnline %}
-            <tr>
-            <td><a href="{% url 'homepage:chat' User.id User.username i.id i.username %}">{{ i.username }}</a></td>
-            <td><a href="{% url 'homepage:otherprofile' User.username i.username %}"><img src="{% static 'homepage/images/giphy.gif'%}"" style="height:32 ;width:32;"%}></a></td>
-            </tr> 
-            {% endfor %}
-            </table>
+            </ul>
         </div>
-    </div>
-    <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
-    <div class="main_lesson">
-        <div class= "lesson_content">
-            <img id="showhidebtn" class="hide_lesson" src="{% static 'homepage/images/hide.png' %}" onclick="showhidelesson(this, this.parentNode)">
-            <div id="content_pane">  
-                {% with template_name=loadlesson.content %}
-                    {% include template_name %}
-                {% endwith %}
+
+        <script>
+            function removeLastLine(){
+                lines = document.getElementsByName("lines");
+                line = lines[lines.length-1]
+                line.parentNode.removeChild(line);
+            }
+            removeLastLine();
+        </script>
+        
+        <div class="lesson_sidebar">
+            <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
+            <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
+            <p></p>
+            <div id="qrs-pane">Quick Reference Sheet</div>
+            <div id="who-pane">
+                <table>
+                {% for i in whosOnline %}
+                <tr>
+                <td><a href="{% url 'homepage:chat' User.id User.username i.id i.username %}">{{ i.username }}</a></td>
+                <td><a href="{% url 'homepage:otherprofile' User.username i.username %}"><img src="{% static 'homepage/images/giphy.gif'%}" style="height:32 ;width:32;"%}></a></td>
+                </tr> 
+                {% endfor %}
+                </table>
             </div>
         </div>
-        <div class= "coding_practice">
-            <p> Write your code here: </p>
-            {% if loadlesson.lesson_name %}
-            {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
-            {% elif loadlesson.challenge_name %}
-            {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text %}
-            {% endif %}
-        </div>
-    </div>
-
-
+        
+        <script>toggleSidebar(document.getElementById("qrs"), document.getElementById("who"));</script>
+        <div class="main_lesson">
+            <div class= "lesson_content">
+                <img id="showhidebtn" class="hide_lesson" src="{% static 'homepage/images/hide.png' %}" onclick="showhidelesson(this, this.parentNode)">
+                <div id="content_pane">  
+                    {% with template_name=loadlesson.content %}
+                        {% include template_name %}
+                    {% endwith %}
+                    <div class= "coding_practice">
+                        <p> Write your code here: </p>
+                        {% if loadlesson.lesson_name %}
+                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
+                        {% elif loadlesson.challenge_name %}
+                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text %}
+                        {% endif %}
+                    </div>
+                    <div class="bottom">
+                    </div>
+                </div> <!-- end content-pane-->
+            </div><!-- end lesson_content -->
+        </div><!-- end main lesson -->
+    </div> 
     <div id="mck-side-panel">
         <div id="mck-sidebox" class="mck-sidebox mck-box fade">
             <div class="mck-box-dialog mck-box-sm mck-right mck-bg-white">
@@ -796,4 +805,20 @@
                         });
     </script>
 </body>
+
+<script>
+$( window ).resize(function() {
+    var b = $('body').height();
+    $('#page').height(b-50);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+
+$( document ).load(function() {
+    var b = $('body').height();
+    $('#page').height(b-50);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+    var b = $('body').height();
+    $('#page').height(b-50);
+</script>
 </html>

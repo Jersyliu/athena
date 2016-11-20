@@ -1,19 +1,19 @@
-html, body, {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    overflow: hidden;
+
+
+.page{
+    /*position:relative;
+    height:inherit;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: solid;
+    border-width: 1px;*/
 }
-
-
 
 .course_nav {
     float:left;
     width:175px;
-    height:90%;
-    background-color: #e6e6ff;
+    height:100%;
+    background-color: #f9f9f9;
     border-right:solid;
     border-width:1px;
 }
@@ -21,8 +21,8 @@ html, body, {
 .lesson_sidebar{
     float:right;
     width:250px;
-    height:90%;
-    background-color: #e6e6ff;
+    height:100%;
+    background-color: #f9f9f9;
     border-left:solid;
     border-width:1px;    
 }
@@ -34,12 +34,15 @@ html, body, {
 }
 
 .lesson_content{
-    height:50%;
+    height:100%;
     border-bottom: solid;
     border-width: 1px;
     overflow: auto;
 }
 
+.bottom{
+    height:50px;
+}
 .coding_practice{
     display:block;
     overflow: auto;
@@ -64,22 +67,64 @@ html, body, {
 
 .icon{
     position:relative;
-    padding: 0px 14px 0px 0px;
-    top: 1px;
+    padding: 0px 40px 0px 0px;
+    top: 2px;
+    z-index: 2;
+}
+
+.challenge_icon{
+    position:relative;
+    height: 20px;
+    width: 20px;
+    padding: 0px 33px 0px 0px;
+    left: -2px;
+    top: 2px;
+    z-index: 2;
+}
+
+.incomplete_line{
+    position:relative;
+    left:7px;
+    height: 30px;
+    top: -5px;
+    margin-bottom:-9px;
+    border-left:solid;
+    border-width:1px;
+    border-color:d9d4ed;
+}
+
+.complete_line{
+    position:relative;
+    left:7px;
+    height: 30px;
+    top: -5px;
+    margin-bottom:-9px;
+    border-left:solid;
+    border-width:1px;
+    border-color:5b40b2;
 }
 
 .lesson_item{
-    padding-bottom:10px;
     cursor:pointer;
     text-decoration:none;
-    color:black;
+    color:d9d4ed;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+
 }
 
-.current_lesson_item{
-    padding-bottom:10px;
+.current_lesson_item{    
     cursor:pointer;
     text-decoration:none;
-    color:blue;
+    color:fb8f00;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
 }
 
 .lesson_complete{
@@ -88,11 +133,11 @@ html, body, {
     background-attachment: fixed;
     background-position: right;
     background-size: 16px 16px;
-    color:green;
+    color:5b40b2;
 }
 
 .sidebar_btn{
-    width:49%;
+    width:123px;
     padding: 10px;
     border: none;
     display: inline-block;
