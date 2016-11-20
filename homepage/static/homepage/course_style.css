@@ -38,6 +38,7 @@
     border-bottom: solid;
     border-width: 1px;
     overflow: auto;
+    margin: 15px;
 }
 
 .bottom{
