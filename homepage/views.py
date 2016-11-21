@@ -186,7 +186,6 @@ def keepprogress(request, username, lessonname):
     #isLesson = "true"
     
     if request.POST["haha"] == "true":
-        return HttpResponse("jlskdjf")
         a = Progress.objects.filter(newuser__username = username, lesson__lesson_name = lessonname)
         if len(a) == 0:
             p = Progress(newuser=NewUser.objects.get(username=username), lesson=Lesson.objects.get(lesson_name=lessonname), progress_until_now=request.POST["inputcode"])
@@ -204,14 +203,10 @@ def keepprogress(request, username, lessonname):
             p.save()
         return HttpResponse("")
     else:
-        #
         a = ChallengeProgress.objects.filter(newuser__username = username, challenge__challenge_name = lessonname)
-        #return HttpResponse("jlskdjf")
         if len(a) == 0:
-            #return HttpResponse("jlskdjf")
             p = ChallengeProgress(newuser=NewUser.objects.get(username=username), challenge=Challenge.objects.get(challenge_name=lessonname), progress_until_now=request.POST["inputcode"])
             p.save()
-            #return HttpResponse("jlskdjf")
         else:
             p = ChallengeProgress.objects.get(newuser__username = username, challenge__challenge_name = lessonname)
             p.progress_until_now = request.POST["inputcode"]
