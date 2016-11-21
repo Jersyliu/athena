@@ -28,7 +28,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/course_list_style.css' %}" />
 
     <div class="titleAthena">
-<<<<<<< HEAD
+
         <span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span>
         <span class="helloUser">
             Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}<img class="img-circle user_pic" src="{% static picture %}" style="height:32;width:32;"></a><span class="score">Score: <strong>{{score}}</strong></span>
@@ -67,12 +67,6 @@
             {% endfor %}
         </div>
     </div>
-    
-=======
-        <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span>
-        <span class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></span>        
-    </div>
->>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
 
     <script>toggleSidebar(document.getElementById("who"), document.getElementById("qrs"));</script>
 {% include './chat.html' %}
