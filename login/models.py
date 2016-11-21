@@ -35,7 +35,7 @@ class Progress(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_complete = models.BooleanField(default=False)
     progress_until_now = models.TextField(default=None)
-    notes = models.TextField( default=None)
+    notes = models.TextField(default="")
     
     def __str__(self):
         return  str(self.id) + ";" + self.newuser.username+";"+self.progress_until_now
@@ -55,7 +55,7 @@ class ChallengeProgress(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     is_complete = models.BooleanField(default=False)
     progress_until_now = models.TextField(default=None)
-    notes = models.TextField(default=None)
+    notes = models.TextField(default="")
     
     def __str__(self):
         return self.newuser.username+";"+self.progress_until_now
