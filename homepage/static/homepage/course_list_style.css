@@ -71,6 +71,9 @@ table.center {
 	border-style: solid;
 }
 
-
+.course_list_header{
+    font-family: "sans-serif"
+    text-align: center;
+}
 
 
