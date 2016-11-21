@@ -1,0 +1,55 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/course_style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/course_list_style.css' %}" />
+
+<table class="center">
+    <th colspan="2" style="text-align: left;"><h1> Start You Journey </h1></th>
+    <tr>
+        {% for i in easyc %}
+        <td>
+            <div class = "course_block easy"> 
+                <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}" class="course_link">
+                <img class = "course_image" src= "{% static i.image %}">
+                <p class = "course_content"> {{ i.course_name}}<br>{{ i.num_of_lessons}} lessons </p>
+                </a>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>
+
+
+<table class="center">
+    <th colspan="2" style="text-align: left;"><h1> You Are A Warrior </h1></th>
+    <tr>
+        {% for i in mediumc %}
+        <td>
+            <div class = "course_block medium"> 
+                <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}" class="course_link">
+                <img class = "course_image" src= "{% static i.image %}">
+                <p class = "course_content"> {{ i.course_name}}<br>{{ i.num_of_lessons}} lessons </p>
+                </a>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>
+
+
+<table class="center">
+    <th colspan="2" style="text-align: left;"><h1> Become A Guru </h1></th>
+    <tr>
+        {% for i in hardc %}
+        <td>
+            <div class = "course_block hard"> 
+                <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}" class="course_link">
+                <img class = "course_image" src= "{% static i.image %}">
+                <p class = "course_content"> {{ i.course_name}}<br>{{ i.num_of_lessons}} lessons </p>
+                </a>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>
+

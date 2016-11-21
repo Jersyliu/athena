@@ -13,7 +13,8 @@ class NewUser(User):
 class Course(models.Model):
     course_name = models.CharField(max_length=200)
     num_of_lessons = models.IntegerField(default=0)
-    image= models.CharField(max_length=200, default=None)
+    image = models.CharField(max_length=200, default="")
+    level = models.CharField(max_length=200, default="")
     #Quickreference sheet
     #gif library
     def __str__(self):
@@ -24,8 +25,9 @@ class Lesson(models.Model):
     lesson_name = models.CharField(max_length=200)
     content = models.CharField(max_length=200)
     summary = models.TextField(default="")
-    expected_output = models.CharField(max_length=200, default=None)
+    expected_output = models.CharField(max_length=200, default="")
     point_value = models.IntegerField(default=10)
+    error_message = models.TextField(default="")
     #video
     def __str__(self):
         return self.course.course_name+";"+self.lesson_name
@@ -44,8 +46,9 @@ class Challenge(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     challenge_name = models.CharField(max_length=200)
     content = models.CharField(max_length=200)
-    expected_output = models.CharField(max_length=200, default=None)
+    expected_output = models.CharField(max_length=200, default="")
     point_value = models.IntegerField(default=20)
+    error_message = models.TextField(default="")
     
     def __str__(self):
         return self.lesson.lesson_name+";"+self.challenge_name

@@ -5,6 +5,7 @@
     function toggleSidebar(el, other){
         other.style.backgroundColor= "darkorange";
         other.style.color = "white";
+        other.style.fontWeight = "300";
         el.style.backgroundColor = "#f9f9f9";
         el.style.color = "grey";
         if (el.name == 'qrs'){
@@ -28,19 +29,33 @@
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/course_list_style.css' %}" />
 
     <div class="titleAthena">
-
         <span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span>
         <span class="helloUser">
-            Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}<img class="img-circle user_pic" src="{% static picture %}" style="height:32;width:32;"></a><span class="score">Score: <strong>{{score}}</strong></span>
-        </span>      
+            <a class="username" href="{% url 'homepage:profile' User.username %}">
+                <table style="margin:-5px; padding: 0;">
+                    <tr style="margin:0; padding: 0;"><td style="margin:0; padding: 0; text-align: right; vertical-align: bottom;">Welcome, <strong>{{  User.username }}</strong></td><td rowspan="2" style="margin-left: 5px; padding-left:5px;"><img class="img-circle user_pic" src="{% static picture %}" style="height:38;width:38;"></td></tr>
+                    <tr style="margin:0; padding: 0;"><td style="margin:0; padding: 0; text-align: right; vertical-align: top;">Score: <strong>{{score}}</strong></td></tr>
+                </table>
+            </a>
+        </span>
     </div>
     
     <div id="listpage">
         <div class="lesson_sidebar_list" id="timeline">
-            <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
+            <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Timeline</button>
             <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
             <p></p>
-            <div id="qrs-pane">Quick Reference Sheet</div>
+            <div id="qrs-pane">
+                <table>
+                    {% for i in news %}
+                        {% if i.challenge %}
+                            <tr><td><strong>{{ i.newuser.username }}</strong></td><td> finished </td><td><strong>{{ i.challenge.challenge_name }}</strong></td></tr>
+                        {% else %}
+                            <tr><td><strong>{{ i.newuser.username }}</strong></td><td> finished </td><td><strong>{{ i.lesson.lesson_name }}</strong></td></tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
             <div id="who-pane">
                 <table class="online_user_table">
                 {% for i in whosOnline %}
@@ -52,23 +67,17 @@
                 </table>
             </div>
         </div>
-        <div class="courselist" id="course_list">
-            <h1 style="padding-left:30px;"> Course List: </h1>
-            
-            {% for i in CourseClass %}
-                <div class = "course_block"> 
-                    <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}"class="course_link">
-                    <!--<p class = "course_title"> {{ i.course_name}} </p> -->
-                    <img class = "course_image" src= "{% static i.image %}">
-                    <p class = "course_content">{{ i.num_of_lessons}} lessons </p>
-                    </a>
-                </div>
-              
-            {% endfor %}
-        </div>
-    </div>
 
-    <script>toggleSidebar(document.getElementById("who"), document.getElementById("qrs"));</script>
+        <div class="courselist" id="course_list">
+            <div class="detail">
+                {% include './detaillist.html' with easyc=easy mediumc=medium hardc=hard %}
+            </div>
+        </div>
+        
+    </div>
+    
+
+<script>toggleSidebar(document.getElementById("who"), document.getElementById("qrs"));</script>
 {% include './chat.html' %}
 </body>
 <script>
@@ -83,5 +92,10 @@ $( document ).load(function() {
     $('#listpage').height(b-50);
   $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
 });
+var b = $('body').height();
+$('#listpage').height(b-50);
+
+var a = $('body').width();
+
 </script>
 </html>

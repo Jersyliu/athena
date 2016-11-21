@@ -1,6 +1,7 @@
 html {
 	height:100%;
 	width:100%;
+    margin:0px;
 	
 }
 
@@ -33,7 +34,7 @@ body {
     display: inline;
     font-size:18px;
     position:relative;
-    top: -10px;
+    top: 5px;
     right: 50px;
 }
 
@@ -74,7 +75,7 @@ body {
 .user_pic{
     position:relative;
     left:15px;
-    bottom:-16px;
+    bottom:3px;
 }
 
 .listoptions ul{
