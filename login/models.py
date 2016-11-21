@@ -23,7 +23,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson_name = models.CharField(max_length=200)
     content = models.CharField(max_length=200)
-    summary = models.TextField(default=None)
+    summary = models.TextField(default="")
     expected_output = models.CharField(max_length=200, default=None)
     point_value = models.IntegerField(default=10)
     #video
@@ -34,8 +34,8 @@ class Progress(models.Model):
     newuser = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_complete = models.BooleanField(default=False)
-    progress_until_now = models.TextField(default=None)
-    notes = models.TextField( default=None)
+    progress_until_now = models.TextField(default="")
+    notes = models.TextField(default="")
     
     def __str__(self):
         return  str(self.id) + ";" + self.newuser.username+";"+self.progress_until_now
@@ -54,8 +54,8 @@ class ChallengeProgress(models.Model):
     newuser = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     is_complete = models.BooleanField(default=False)
-    progress_until_now = models.TextField(default=None)
-    notes = models.TextField(default=None)
+    progress_until_now = models.TextField(default="")
+    notes = models.TextField(default="")
     
     def __str__(self):
         return self.newuser.username+";"+self.progress_until_now
