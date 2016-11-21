@@ -48,15 +48,10 @@
 </head>
 <body>
     <div class="titleAthena">
-<<<<<<< HEAD
         <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span><span class="Course_Name">{{CourseName}}</span><span class="Lesson_Name">{{ loadlesson.challenge_name }}{{ loadlesson.lesson_name }}</span></span>
         <span class="helloUser">
             Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}<img class="img-circle user_pic" src="{% static picture %}" style="height:32;width:32;"></a><span class="score">Score: <strong>{{score}}</strong></span>
         </span>
-=======
-        <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span><span class="Course_Name">{{CourseName}}</span><span class="Lesson_Name">{{loadlesson.lesson_name}}</span></span>
-        <span class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}</a></span>        
->>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
     </div>
     <div class="page" id="page">
         <div class="course_nav">
@@ -104,17 +99,12 @@
         </script>
         
         <div class="lesson_sidebar">
-<<<<<<< HEAD
             <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Script Notes</button>
             <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
             <p></p>
             <div id="qrs-pane">
                 <textarea id="notes" style="position:relative; height:84%; width:100%;">{{ TextNotes }}</textarea>
-=======
-            <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
-            <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
-            <p></p>
-            <div id="qrs-pane">Quick Reference Sheet</div>
+            </div>
             <div id="who-pane">
                 <table>
                 {% for i in whosOnline %}
@@ -594,7 +584,6 @@
                             title="Exit Group">Exit Group</button>
                     </div>
                 </div>
->>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
             </div>
             <div id="who-pane">
                 <table class="online_user_table">
@@ -663,30 +652,4 @@ $( document ).load(function() {
     });
 </script>
 
-<<<<<<< HEAD
-=======
-                            // var contactjson = {"contacts": [{"userId": "user1", "displayName": "Devashish", "imageLink": "https://www.applozic.com/resources/images/applozic_icon.png"}, {"userId": "user2", "displayName": "Adarsh", "imageLink": "https://www.applozic.com/resources/images/applozic_icon.png"}, {"userId": "user3", "displayName": "Shanki", "imageLink": "https://www.applozic.com/resources/images/applozic_icon.png"}]};
-                            // To load contact list use below function and pass contacts json in format shown above in variable 'contactjson'. 
-                            // $applozic.fn.applozic('loadContacts', contactjson);
-
-                        });
-    </script>
-</body>
-
-<script>
-$( window ).resize(function() {
-    var b = $('body').height();
-    $('#page').height(b-50);
-  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
-});
-
-$( document ).load(function() {
-    var b = $('body').height();
-    $('#page').height(b-50);
-  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
-});
-    var b = $('body').height();
-    $('#page').height(b-50);
-</script>
->>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
 </html>
