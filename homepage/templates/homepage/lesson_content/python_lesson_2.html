@@ -10,14 +10,14 @@
 
 <h2>In Python</h2>
 
-<p>Storing data in Python is very much like storing files on your computer. In Python, the data is stored in variables. However, there are more rules that need to be followed. The variable name must:
+<p>Storing data in Python is very much like storing files on your computer. In Python, the data is stored in variables. A variable is a space in memory where you save data. However, there are more rules that need to be followed. Each variable must have a name so that you can identify the data that is stored there. The variable name must also:
 <p>
-Start w/ A-Z, a-z<br>
-Contain only A-Z, a-z, 0-9, _<br>
-Not contain spaces, punctuation, special characters, except _<br>
+start with any letter, a to z (and capital letters are fine too)<br>
+contain only letters, numbers, and the underscore symbol, _<br>
+not contain spaces, punctuation, or any other special characters<br>
 </p>
 <p>
-Programs are written to be read and maintained by others (and you). Clarity is essential. The following are some examples of good variable names because they describe the data they’re storing.<br>
+Programs are written to be read and maintained by you, the programmer, or other programmers. Clarity is essential. The following are some examples of good variable names because they describe the data they’re storing.<br>
 robotSpeed<br>
 iceCreamPrice<br>
 distanceTraveled<br>
@@ -32,6 +32,9 @@ robtSpd – confusing abbreviation<br>
 x – this variable name is not descriptive<br>
 o – this variable name is not descriptive and can be confused with a zero<br>
 </p>
+
+<h2><strong>Your First Variable</strong></h2>
+
 <p>
 To store data in a variable, use an equal sign. This operation is called assignment. To display the stored value, use print. For example:<br>
 distanceTraveled = 100<br>
@@ -45,16 +48,19 @@ Output:<br>
 2.5<br>
 </p>
 <p>
-In the example above, 100 was stored in the variable, distanceTraveled and 2.5 was stored in the variable, iceCreamPrice. Notice that the units are not specified. We don’t know if distanceTraveled is 100 miles or 100 kilometers. Just like in a calculator, the programmer is responsible for keeping track of the units. 
+In the example above, in the first line, 100 was stored in the variable in, distanceTraveled. In the second line, 2.5 was stored in the variable, iceCreamPrice. Then, in the third line, the program looks at the data within distanceTraveled and finds that 100 is stored there. Then it goes ahead and runs the print part of the third line and displays 100 in the output. Lastly, the fourth line looks up the data in iceCreamPrice and it is then printed as well. Try this example out in the scratch pad. 
+
+Note that there are no quotes required for printing variables. Also, notice that the units are not specified. We don’t know if distanceTraveled is 100 miles or 100 kilometers. Just like in a calculator, the programmer is responsible for keeping track of the units. 
 </p>
+
+<h2><strong>You vs. Your Rival</strong></h2>
+
 <p>
-Here is another example:<br>
+Here is another scratch pad example:<br>
 myHighScore = 777777<br>
 myRivalScore = 100000<br>
 print myHighScore<br>
 print myRivalScore<br>
-</p>
-<p>
 print "My rival played the game again"<br>
 myRivalScore = 999999<br>
 print myHighScore<br>
@@ -69,4 +75,4 @@ My rival played the game again<br>
 999999<br>
 </p>
 <p>
-In this example, note that similar to overwriting a file on a computer, the variable, myRivalScore, was overwritten to 999999. Notice that the value of myHighScore was unchanged because we did not assign it a new value.</p>
+In this example, the first four lines are like the previous example. You store two values in two different variables and print them out. Then, on the 5th line, you print out the string, "My rival played the game again". In the 6th line, your rival got a higher score than you and that value is now stored in myRivalScore. Note that this is similar to overwriting a file on a computer. Then in the 7th and 8th line, the variables are printed out again. Notice that the value of myHighScore was unchanged because we did not assign it a new value.</p>

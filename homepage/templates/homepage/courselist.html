@@ -1,20 +1,87 @@
 {% load static %}
+<html>
+<head>
+<script>
+    function toggleSidebar(el, other){
+        other.style.backgroundColor= "darkorange";
+        other.style.color = "white";
+        el.style.backgroundColor = "#f9f9f9";
+        el.style.color = "grey";
+        if (el.name == 'qrs'){
+            document.getElementById("who-pane").style.visibility = "hidden";
+            document.getElementById("qrs-pane").style.visibility = "visible";
+            document.getElementById("qrs-pane").style.height = "auto";
+            document.getElementById("who-pane").style.height = "0px";            
+        }
+        else{
+            document.getElementById("qrs-pane").style.visibility = "hidden";
+            document.getElementById("who-pane").style.visibility = "visible"; 
+            document.getElementById("who-pane").style.height = "auto";
+            document.getElementById("qrs-pane").style.height = "0px";                
+        }
+    }
+</script>
+</head>
+<body>
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/course_style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/course_list_style.css' %}" />
 
-<div class="titleAthena">
-    <span float="left"><h1 class="titleText"> ATHENA </h1></span>
-    <p class="helloUser">Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{ User.username }}</a></p>
-</div>
-
- <h1>Course List: </h1>
-
-{% for i in CourseClass %}
-    <div class = "course_block"> 
-        <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}"class="course_link">
-        <!--<p class = "course_title"> {{ i.course_name}} </p> -->
-        <img class = "course_image" src= "{% static i.image %}">
-        <p class = "course_content">{{ i.num_of_lessons}} lessons </p>
-        </a>
+    <div class="titleAthena">
+        <span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span>
+        <span class="helloUser">
+            Welcome, <a class="username" href="{% url 'homepage:profile' User.username %}">{{  User.username }}<img class="img-circle user_pic" src="{% static picture %}" style="height:32;width:32;"></a><span class="score">Score: <strong>{{score}}</strong></span>
+        </span>      
     </div>
-    <div class="spacing"></div>
-{% endfor %}
+    
+    <div id="listpage">
+        <div class="lesson_sidebar_list" id="timeline">
+            <button class="sidebar_btn" name="qrs" onclick="toggleSidebar(this, document.getElementById('who'))" id= "qrs" >Quick Reference</button>
+            <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
+            <p></p>
+            <div id="qrs-pane">Quick Reference Sheet</div>
+            <div id="who-pane">
+                <table class="online_user_table">
+                {% for i in whosOnline %}
+                <tr>
+                <td class="table_row"><a href="{% url 'homepage:otherprofile' User.username i.username %}"><img class="img-circle" src="{% static i.picture %}" style="height:32;width:32;"%}></a></td>
+                <td class="table_row"><a class="online_user" href="{% url 'homepage:chat' User.id User.username i.id i.username %}">{{ i.username }}</a></td>                                
+                </tr> 
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="courselist" id="course_list">
+            <h1 style="padding-left:30px;"> Course List: </h1>
+            
+            {% for i in CourseClass %}
+                <div class = "course_block"> 
+                    <a href="{% url 'homepage:course' User.username i.course_name i.course_name%}"class="course_link">
+                    <!--<p class = "course_title"> {{ i.course_name}} </p> -->
+                    <img class = "course_image" src= "{% static i.image %}">
+                    <p class = "course_content">{{ i.num_of_lessons}} lessons </p>
+                    </a>
+                </div>
+              
+            {% endfor %}
+        </div>
+    </div>
+    
+
+    <script>toggleSidebar(document.getElementById("who"), document.getElementById("qrs"));</script>
+{% include './chat.html' %}
+</body>
+<script>
+$( window ).resize(function() {
+    var b = $('body').height();
+    $('#listpage').height(b-50);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+
+$( document ).load(function() {
+    var b = $('body').height();
+    $('#listpage').height(b-50);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+</script>
+</html>
