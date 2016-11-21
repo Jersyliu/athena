@@ -103,7 +103,7 @@
             <button class="sidebar_btn" name="who" onclick="toggleSidebar(this, document.getElementById('qrs'))" id= "who">Who's Online</button>        
             <p></p>
             <div id="qrs-pane">
-                <textarea id="notes" style="position:relative; height:84%; width:100%;">{{ TextNotes }}</textarea>
+                <textarea id="notes" style=" height:450px; width:299px;">{{ TextNotes }}</textarea>
             </div>
             <div id="who-pane">
                 <table>
@@ -597,27 +597,7 @@
             </div>
         </div>
         
-        <script>toggleSidebar(document.getElementById("who"), document.getElementById("qrs"));</script>
-        <div class="main_lesson">
-            <div class= "lesson_content">
-               
-                <div id="content_pane">  
-                    {% with template_name=loadlesson.content %}
-                        {% include template_name %}
-                    {% endwith %}
-                    <div class= "coding_practice">
-                        <p> Write your code here: </p>
-                        {% if loadlesson.lesson_name %}
-                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
-                        {% elif loadlesson.challenge_name %}
-                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text %}
-                        {% endif %}
-                    </div>
-                    <div class="bottom">
-                    </div>
-                </div> <!-- end content-pane-->
-            </div><!-- end lesson_content -->
-        </div><!-- end main lesson -->
+
     </div> 
     {% include './chat.html' %}
 </body>
