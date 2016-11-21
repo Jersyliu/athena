@@ -21,9 +21,15 @@
 
 .lesson_sidebar{
     float:right;
+<<<<<<< HEAD
     width:300px;
     height:100%;
     background-color: #f9f9f9;    
+=======
+    width:250px;
+    height:100%;
+    background-color: #f9f9f9;
+>>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
     border-left:solid;
     border-width:1px;  
     border-color:fb8f00;    
@@ -89,7 +95,11 @@
 
 .icon{
     position:relative;
+<<<<<<< HEAD
     padding: 0px 18px 0px 0px;
+=======
+    padding: 0px 40px 0px 0px;
+>>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
     top: 2px;
     z-index: 2;
 }
@@ -98,7 +108,11 @@
     position:relative;
     height: 20px;
     width: 20px;
+<<<<<<< HEAD
     padding: 0px 12px 0px 0px;
+=======
+    padding: 0px 33px 0px 0px;
+>>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
     left: -2px;
     top: 2px;
     z-index: 2;
@@ -159,7 +173,11 @@
 }
 
 .sidebar_btn{
+<<<<<<< HEAD
     width:148px;
+=======
+    width:123px;
+>>>>>>> 316e56ba129634e2d69d44287c6e28481e354214
     padding: 10px;
     border: none;
     display: inline-block;
