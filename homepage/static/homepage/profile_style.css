@@ -1,0 +1,48 @@
+.container{
+    overflow:hidden;
+}
+
+.leftpane{
+    float:left;
+    width:300px;
+    height:100%;
+    background-color: grey;
+    
+}
+
+li{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.newsfeed{
+    height: 100%;
+    z-index:-1;
+    
+}
+
+.newscontent{
+    padding:0px 20px;
+}
+
+.progress_block{
+    float: left;
+    width: 210px;
+    padding: 8px;
+    background-color: orange;  
+    border-radius:10px;
+    margin-left: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.progress_block li{
+    list-style:none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+}
+
+.newscontent h1{
+    position:relative;
+    left: 25px;
+    font-family:Arial, Helvetica, sans-serif;
+}

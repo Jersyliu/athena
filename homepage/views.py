@@ -31,7 +31,9 @@ def profile(request, username):
         context = {
             "UserName":request.user.username,
             "Progress":Progress.objects.filter(newuser__username=username),
-            "CProgress":ChallengeProgress.objects.filter(newuser__username=username)
+            "CProgress":ChallengeProgress.objects.filter(newuser__username=username),
+            "score": NewUser.objects.get(username=username).score,
+            "picture": NewUser.objects.get(username=username).picture
             }
         return render(request, 'homepage/profile.html',context)
     else:

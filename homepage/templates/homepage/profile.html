@@ -1,6 +1,6 @@
 {% load static %}
-
-    
+<html>
+<head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 /*
@@ -81,43 +81,78 @@ $(document).ready(function() {
     wireUpEvents();
 });*/
 </script>
-
-
-
+</head>
 <link rel="stylesheet" type="text/css" href="{% static 'homepage/style.css' %}" />
-
-<div class="titleAthena">
-    <span><h1 class="titleText"> ATHENA </h1></span>
-    <p class="helloUser">Welcome, <a class="username" href="#">{{ UserName }}</a></p>
-</div>
-
-<div class="leftpane">
-    <div class="profilePic">
-        <img class="img-circle"src="{% static 'homepage/images/profilepic.png' %}">
-        <p> -- {{ UserName }} -- </p>
-        <hr>
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/profile_style.css' %}" />
+<body>
+    <div class="titleAthena">
+        <span><span class="format_logo"><img  src="{% static 'homepage/images/logo.png' %}"></span><span class="Course_Name">{{CourseName}}</span><span class="Lesson_Name">{{ loadlesson.challenge_name }}{{ loadlesson.lesson_name }}</span></span>
+                <span class="helloUser">
+            <a class="username" href="{% url 'homepage:profile' UserName %}">
+                <table style="margin:-5px; padding: 0;">
+                    <tr style="margin:0; padding: 0;"><td style="margin:0; padding: 0; text-align: right; vertical-align: bottom;">Welcome, <strong>{{  UserName }}</strong></td><td rowspan="2" style="margin-left: 5px; padding-left:5px;"><img class="img-circle user_pic" src="{% static picture %}" style="height:38;width:38;"></td></tr>
+                    <tr style="margin:0; padding: 0;"><td style="margin:0; padding: 0; text-align: right; vertical-align: top;">Score: <strong>{{score}}</strong></td></tr>
+                </table>
+            </a>
+        </span> 
     </div>
-    <div class="listoptions">
-        <ul>
-            <li><a href="#"><label>>> </label>Course in Progress</a></li>
-            <li><a href="{% url 'homepage:courseList' UserName %}"><label> >> </label>Course List</a></li>
-        </ul>
-    </div>
-<input type=button value="Go back" onClick="window.history.back();return false;">
-<a class="abutton" href="{% url 'homepage:logoutuser' %}">Logout</a>
-</div>
+    
 
-<div class="newsfeed">
-    <div class="newscontent">
-        <h1> This is your progress:</h1>
-        <p>Lesson Completed:</p>
-        {% for i in Progress %}
-        <p>{{ i.lesson.lesson_name }} : {{ i.is_complete }}</p>
-        {% endfor %}
-        <br><br>
-        <p>Challenge Completed:</p>
-        {% for i in CProgress %}
-        <p>{{ i.challenge.challenge_name }} : {{ i.is_complete }}</p>
-        {% endfor %}
+    <div class="container">
+        <div class="leftpane">
+            <div class="profilePic">
+                <img class="img-circle"src="{% static 'homepage/images/profilepic.png' %}">
+                <p> -- {{ UserName }} -- </p>
+                <hr>
+            </div>
+            <div class="listoptions">
+                <ul>
+                    <li><a href="#"><label>>> </label>Course in Progress</a></li>
+                    <li><a href="{% url 'homepage:courseList' UserName %}"><label> >> </label>Course List</a></li>
+                </ul>
+            </div>
+        <input type=button value="Go back" onClick="window.history.back();return false;">
+        <a class="abutton" href="{% url 'homepage:logoutuser' %}">Logout</a>
+        </div>
+
+        <div class="newsfeed" id="newsfeed">
+            <div class="newscontent">
+                <h1> This is your progress:</h1>
+                <div class="progress_block">
+                    <p><strong>Lesson Completed:</strong></p>
+                    {% for i in Progress %}
+                    {% if i.is_complete %}
+                        <li>{{ i.lesson.lesson_name }} : Complete! </li>
+                    {% else %}
+                        <li>{{ i.lesson.lesson_name }} : In Progress!</li>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="progress_block">
+                    <p><strong>Challenge Completed:</strong></p>
+                    {% for i in CProgress %}
+                        {% if i.is_complete %}
+                            <li>{{ i.challenge.challenge_name }} : Complete! </li>
+                        {% else %}
+                            <li>{{ i.challenge.challenge_name }} : In Progress!</li>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+<script>
+$( window ).resize(function() {
+    var b = $('body').width();
+    $('#newsfeed').width(b-310);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+
+$( document ).load(function() {
+    var b = $('body').width();
+    $('#newsfeed').width(b-310);
+  $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
+});
+</script>
+</html>
