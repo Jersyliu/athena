@@ -9,8 +9,7 @@ from django.utils import timezone
 
 from login.models import NewUser, Course, Lesson, Progress, Challenge, ChallengeProgress, CourseLocation
 
-
-
+from random import shuffle
 def get_all_logged_in_users():
     # Query all non-expired sessions
     # use timezone.now() instead of datetime.now() in latest versions of Django
@@ -32,7 +31,9 @@ def profile(request, username):
         context = {
             "UserName":request.user.username,
             "Progress":Progress.objects.filter(newuser__username=username),
-            "CProgress":ChallengeProgress.objects.filter(newuser__username=username)
+            "CProgress":ChallengeProgress.objects.filter(newuser__username=username),
+            "score": NewUser.objects.get(username=username).score,
+            "picture": NewUser.objects.get(username=username).picture
             }
         return render(request, 'homepage/profile.html',context)
     else:
@@ -57,19 +58,28 @@ def logoutuser(request):
     return HttpResponseRedirect(reverse('login:index'))
 
 def courseList(request, username):
-    '''
-    s = 'haha'
-    for i in request.session.keys():
-        s += str(i)+"  "+str(request.session[i])+"<br>"
-    return HttpResponse(s)
-    '''
     whosOnline = get_all_logged_in_users()
+    lessonP10 = Progress.objects.filter(is_complete=True)
+    challengeP10 = ChallengeProgress.objects.filter(is_complete=True)
+    news = []
+    for i in lessonP10:
+        news.append(i)
+    for i in challengeP10:
+        news.append(i)
+    shuffle(news)
+    easy = Course.objects.filter(level="easy")
+    medium = Course.objects.filter(level="medium")
+    hard = Course.objects.filter(level="hard")
     context = {
            "User":request.user,
            "CourseClass":Course.objects.all(),
+           "easy":easy,
+           "medium":medium,
+           "hard":hard,
            "whosOnline":whosOnline,
            "picture": NewUser.objects.get(username=username).picture,
-           "score": NewUser.objects.get(username=username).score
+           "score": NewUser.objects.get(username=username).score,
+           "news":news
            }
     return render(request, 'homepage/courselist.html', context )
     
@@ -184,7 +194,6 @@ def challenge(request, username, coursename, lessonname, challengename):
 def keepprogress(request, username, lessonname):
     #NewUser.objects.create_user(username="OPP", password="123")
     #isLesson = "true"
-    
     if request.POST["haha"] == "true":
         a = Progress.objects.filter(newuser__username = username, lesson__lesson_name = lessonname)
         if len(a) == 0:
@@ -203,10 +212,14 @@ def keepprogress(request, username, lessonname):
             p.save()
         return HttpResponse("")
     else:
+        #return HttpResponse("jlskdjf")
         a = ChallengeProgress.objects.filter(newuser__username = username, challenge__challenge_name = lessonname)
+        #return HttpResponse("jlskdjf")
         if len(a) == 0:
+            #return HttpResponse("jlskdjf")
             p = ChallengeProgress(newuser=NewUser.objects.get(username=username), challenge=Challenge.objects.get(challenge_name=lessonname), progress_until_now=request.POST["inputcode"])
             p.save()
+            #return HttpResponse("jlskdjf")
         else:
             p = ChallengeProgress.objects.get(newuser__username = username, challenge__challenge_name = lessonname)
             p.progress_until_now = request.POST["inputcode"]
@@ -242,8 +255,6 @@ def keepnotes(request, username, lessonname):
             p.notes=request.POST["notes"]
             p.save()
         return HttpResponse("")
-    
-    
 
 
 def chat(request, fromID, fromName, toID, toName):

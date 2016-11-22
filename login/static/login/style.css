@@ -95,3 +95,16 @@ body {
 td{
     padding: 5px
 }
+
+.tag_line{
+    background-color: #a4efff;
+    width: 350px;
+    border-radius:25px;
+    margin:40px;
+    font-size:25px;
+    font-family: "sans-serif";
+}
+
+.tag_line p{
+    padding:20px;
+}

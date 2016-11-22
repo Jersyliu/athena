@@ -1,6 +1,7 @@
 html {
 	height:100%;
 	width:100%;
+    margin:0px;
 	
 }
 
@@ -33,7 +34,7 @@ body {
     display: inline;
     font-size:18px;
     position:relative;
-    top: -10px;
+    top: 5px;
     right: 50px;
 }
 
@@ -47,14 +48,6 @@ body {
     font-weight:bold;
     text-decoration:none;
     color:black;
-}
-
-.leftpane{
-    float:left;
-    width:300px;
-    height:100%;
-    background-color: grey;
-    
 }
 
 .profilePic{
@@ -74,7 +67,7 @@ body {
 .user_pic{
     position:relative;
     left:15px;
-    bottom:-16px;
+    bottom:3px;
 }
 
 .listoptions ul{
@@ -97,13 +90,6 @@ label{
     font-weight:bold;
     font-family:sans-serif;
     color:white;   
-}
-
-.newsfeed{
-    float:left;
-}
-.newscontent{
-    padding:0px 20px;
 }
 
 .text-white{
@@ -184,7 +170,7 @@ td{
     height:100px;
     position:relative;
     left:20%;
-    padding: 20px 10px;
+    padding: 20px 20px;
 }
 
 .course_content{
