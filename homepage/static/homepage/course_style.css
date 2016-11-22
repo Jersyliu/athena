@@ -167,3 +167,10 @@
 .sidebar_btn:focus{
     outline: none;
 }
+
+.output_format{
+    background-color:#ffe4c1;
+    height: 60px;
+    border-radius:10px;
+    padding: 5px 10px;
+}
