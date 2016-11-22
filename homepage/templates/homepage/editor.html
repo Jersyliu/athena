@@ -70,8 +70,9 @@ function runit() {
 <br>
 <input class="button" type="submit" value="Run" onclick="runit(), getoutput()">
 </form> 
-<p>output: <img id="status"></p>
-<pre id="output" class="output_format" ></pre> 
+<p style="font-size: 20px; color: #2889ff; ">Output: <img id="status"></p>
+<pre id="output" class="output_format" ></pre>
+<pre id="error_message" class="error">{{ error }}</pre>
 <!-- If you want turtle graphics include a canvas -->
 <div id="mycanvas"></div> 
   <script>

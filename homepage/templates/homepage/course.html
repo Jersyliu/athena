@@ -18,10 +18,12 @@
         pattr = expected_output.trim()
         if (output.trim().match(pattr) != null){
             document.getElementById("status").src = "{% static 'homepage/images/check.png' %}";
+            document.getElementById("error_message").style.visibility = "hidden";
             return "true";
         }
         else {
             document.getElementById("status").src = "{% static 'homepage/images/x.png' %}";
+            document.getElementById("error_message").style.visibility = "visible";
             return "false";
         }
     }
@@ -135,9 +137,9 @@
                     <div class= "coding_practice">
                         <p> Write your code here: </p>
                         {% if loadlesson.lesson_name %}
-                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text %}
+                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.lesson_name isL=isLesson text=Text error=Error %}
                         {% elif loadlesson.challenge_name %}
-                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text %}
+                        {% include './editor.html' with Username=User.username Lessonname=loadlesson.challenge_name isL=isLesson text=Text error=Error %}
                         {% endif %}
                     </div>
                     <div class="bottom">

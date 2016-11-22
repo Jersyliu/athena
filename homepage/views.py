@@ -142,7 +142,8 @@ def course(request, username, coursename, lessonname):
                "progress": completeLesson,
                "cprog": completeChallenges,
                "picture": NewUser.objects.get(username=username).picture,
-               "score": NewUser.objects.get(username=username).score
+               "score": NewUser.objects.get(username=username).score,
+               "Error": lesson.error_message
                }
     return render(request, 'homepage/course.html', context)
 
@@ -187,7 +188,8 @@ def challenge(request, username, coursename, lessonname, challengename):
                "progress": completeLesson,
                "cprog": completeChallenges,
                "picture": NewUser.objects.get(username=username).picture,
-               "score": NewUser.objects.get(username=username).score
+               "score": NewUser.objects.get(username=username).score,
+               "Error": challenge.error_message
                }
     return render(request, 'homepage/course.html', context)
 

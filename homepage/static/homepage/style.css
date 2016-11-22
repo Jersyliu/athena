@@ -102,13 +102,14 @@ label{
     background-color: darkorange; /* Green */
     border: none;
     color: white;
-    padding: 10px 32px;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 25px;
     cursor: pointer;
+    outline:none;
 }
 .button:hover{
     background-color: green; /* Green */           
@@ -117,8 +118,18 @@ label{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border-radius: 25px;            
+    font-size: 20px;
+    border-radius: 25px;
+    outline:none;            
+}
+
+.error{
+    color: white;
+    visibility: hidden;
+    background-color:#ff7373;
+    height: 60px;
+    border-radius:10px;
+    padding: 5px 10px;
 }
 
 
